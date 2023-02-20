@@ -1,0 +1,16 @@
+fragment userFragment on User {
+  id
+  role
+  banned
+  username
+  firstName
+  lastName
+  email
+  emailVerified
+  paypal
+  psnId
+  xboxId
+  avatar
+  lastSeen
+  birthDate
+}

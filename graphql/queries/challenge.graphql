@@ -1,0 +1,5 @@
+query Challenge($id: String!) {
+  challenge(id: $id) {
+    ...challengeFragment
+  }
+}

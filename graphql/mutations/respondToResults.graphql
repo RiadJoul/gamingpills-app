@@ -1,0 +1,5 @@
+mutation RespondToResults($id:String!,$accepted:Boolean!) {
+	respondToResults(id:$id,accepted:$accepted) {
+    ...GeneralResponse
+	}
+}

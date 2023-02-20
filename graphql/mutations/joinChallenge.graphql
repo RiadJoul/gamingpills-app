@@ -1,0 +1,5 @@
+mutation JoinChallenge($id:String!) {
+    JoinChallenge(id:$id) {
+        ...GeneralResponse
+    }
+}

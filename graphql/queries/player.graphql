@@ -1,0 +1,5 @@
+query Player($id:String!) {
+	player(id:$id) {
+        ...userFragment
+  }
+}

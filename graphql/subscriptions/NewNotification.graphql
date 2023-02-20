@@ -1,0 +1,7 @@
+subscription NewNotification {
+  newNotification {
+    title
+    message
+    createdAt
+  }
+}

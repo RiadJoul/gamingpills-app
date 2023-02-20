@@ -1,0 +1,5 @@
+mutation cancelPendingChallenge($id:String!) {
+    cancelPendingChallenge(id:$id) {
+        ...GeneralResponse
+    }
+}

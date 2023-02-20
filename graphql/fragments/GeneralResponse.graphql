@@ -1,0 +1,7 @@
+fragment GeneralResponse on GeneralResponse {
+  errors {
+    field
+    message
+	}
+  success
+}

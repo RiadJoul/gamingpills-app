@@ -1,0 +1,5 @@
+mutation Withdraw($amount:Float!) {
+    withdraw(amount:$amount) {
+        ...GeneralResponse
+    }
+}

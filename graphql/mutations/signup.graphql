@@ -1,0 +1,15 @@
+mutation Register($username: String!
+  $firstName: String!
+  $lastName: String!
+  $email: String!
+  $password: String!
+  $birthDate: DateTime!) {
+  register(username: $username,
+  firstName: $firstName,
+  lastName: $lastName
+  email: $email
+  password: $password
+  birthDate: $birthDate) {
+    ...GeneralResponse
+  }
+}

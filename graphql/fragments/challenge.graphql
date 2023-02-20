@@ -1,0 +1,38 @@
+fragment challengeFragment on Challenge {
+  id
+  mode
+  status
+  homePlayer {
+    id
+    username
+    psnId
+    xboxId
+    avatar
+  }
+  awayPlayer {
+    id
+    username
+    psnId
+    xboxId
+    avatar
+  }
+  homeScore
+  awayScore
+  game {
+      id
+    name
+  }
+  gameMode {
+    id
+    name
+  }
+  bet
+  platform
+  comment
+  winner {
+    id
+    username
+  }
+  createdAt
+  updatedAt
+}

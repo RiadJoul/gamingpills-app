@@ -1,0 +1,22 @@
+query Challenges{
+    challenges {
+        activeChallenges {
+            id
+            status
+            bet
+            createdAt
+        }
+        disputedChallenges {
+            id
+            status
+            bet
+            createdAt
+        }
+	    finishedChallenges {
+            id
+            status
+            bet
+            createdAt
+        }
+  }
+}

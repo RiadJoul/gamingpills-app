@@ -1,0 +1,5 @@
+mutation UpdateUser($psnId:String!,$xboxId:String!,$paypal:String!){
+    updateUser(psnId:$psnId,xboxId:$xboxId,paypal:$paypal) {
+        ...GeneralResponse
+    }
+}

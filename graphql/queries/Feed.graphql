@@ -1,0 +1,75 @@
+query Feed {
+    feed {
+        onlineUsers {
+            id
+            username
+            avatar
+        }
+        games {
+            id
+            name
+            category
+            cover
+        }
+        challenges {
+            id
+            status
+            mode
+            homePlayer {
+                id
+                username
+                avatar
+            }
+            awayPlayer {
+                id
+                username
+                avatar
+            }
+            homeScore
+            awayScore
+            game {
+                id
+                name
+            }
+            gameMode {
+                id
+                name
+            }
+            bet
+            platform
+            comment
+            createdAt
+            updatedAt
+        }
+        myChallenges {
+            id
+            status
+            mode
+            homePlayer {
+                id
+                username
+                avatar
+            }
+            awayPlayer {
+                id
+                username
+                avatar
+            }
+            homeScore
+            awayScore
+            game {
+                id
+                name
+            }
+            gameMode {
+                id
+                name
+            }
+            bet
+            platform
+            comment
+            createdAt
+            updatedAt
+        }
+	}
+}

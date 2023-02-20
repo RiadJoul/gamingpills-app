@@ -1,0 +1,24 @@
+query Players {
+	players {
+		activePlayers {
+            id
+            avatar
+    	    banned
+            username
+            Wallet {
+                id
+			    balance
+            }
+        }
+        bannedPlayers {
+            id
+            avatar
+            banned
+            username
+            Wallet {
+                id
+                balance
+            }
+        }
+  }
+}

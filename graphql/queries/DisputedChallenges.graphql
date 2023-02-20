@@ -1,0 +1,32 @@
+query PlayerDisputedChallenges {
+  playerDisputedChallenges {
+        id
+        status
+        mode
+        homePlayer {
+            id
+            username
+            avatar
+        }
+        awayPlayer {
+            id
+            username
+            avatar
+        }
+        homeScore
+        awayScore
+        game {
+      id
+    name
+  }
+  gameMode {
+    id
+    name
+  }
+        bet
+        platform
+        comment
+        createdAt
+        updatedAt
+  }
+}

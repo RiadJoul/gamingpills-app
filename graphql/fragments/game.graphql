@@ -1,0 +1,9 @@
+fragment GameFragment on Game {
+  id
+  active
+  name
+  category
+  cover
+  createdAt
+  updatedAt
+}

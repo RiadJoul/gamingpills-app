@@ -1,0 +1,25 @@
+query Stats {
+    stats {
+		betsStats {
+		active
+        today
+        allTime
+    }
+    challengesStats {
+        pendingChallenges
+		activeChallenges
+        disputedChallenges
+        finishedChallenges
+    }
+    profitsStats {
+		today
+        thisMonth
+        allTime
+    }
+    walletsStats {
+		totalBalance
+        totalDeposit
+        pendingAmountWithdraws
+    }
+  }
+}

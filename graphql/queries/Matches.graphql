@@ -1,0 +1,92 @@
+query Matches {
+    matches {
+        activeChallenges {
+            id
+            mode
+            status
+            homePlayer {
+                id
+                username
+                avatar
+            }
+            awayPlayer {
+                id
+                username
+                avatar
+            }
+            homeScore
+            awayScore
+            game {
+      id
+    name
+  }
+  gameMode {
+    id
+    name
+  }
+            bet
+            platform
+            comment
+            createdAt
+            updatedAt
+        }
+        invites {
+            id
+            mode
+            status
+            homePlayer {
+                id
+                username
+                avatar
+            }
+            awayPlayer {
+                id
+                username
+                avatar
+            }
+            game {
+      id
+    name
+  }
+  gameMode {
+    id
+    name
+  }
+            bet
+            platform
+            comment
+            createdAt
+            updatedAt
+        }
+        finishedChallenges {
+            id
+            status
+            mode
+            homePlayer {
+                id
+                username
+                avatar
+            }
+            awayPlayer {
+                id
+                username
+                avatar
+            }
+            homeScore
+            awayScore
+            game {
+      id
+    name
+  }
+  gameMode {
+    id
+    name
+  }
+            bet
+            platform
+            comment
+            createdAt
+            updatedAt
+        }
+	}
+}

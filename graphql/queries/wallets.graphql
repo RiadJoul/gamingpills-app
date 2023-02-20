@@ -1,0 +1,25 @@
+query Wallets {
+    wallets {
+        users {
+            id
+            username
+            Wallet {
+                balance
+            }
+        }
+    transactions {
+      id
+      status
+      amount
+    }
+    pendingWithdraws {
+      id
+      status
+      amount
+      user {
+        username
+        paypal
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation UploadResults($id:String!,$homeScore:Float!,$awayScore:Float!) {
+    uploadResults(id:$id,homeScore:$homeScore,awayScore:$awayScore) {
+        ...GeneralResponse
+    }
+}

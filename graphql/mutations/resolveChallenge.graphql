@@ -1,0 +1,5 @@
+mutation ResolveChallenge($id:String!,$winnerId:String!) {
+    resolveChallenge(id:$id,winnerId:$winnerId) {
+        ...GeneralResponse
+    }
+}

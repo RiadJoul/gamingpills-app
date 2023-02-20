@@ -1,0 +1,5 @@
+mutation AddFunds($amount:Float!) {
+    addFunds(amount:$amount) {
+        ...GeneralResponse
+    }
+}

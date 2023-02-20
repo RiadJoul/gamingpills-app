@@ -1,0 +1,22 @@
+mutation createChallenge(
+  $game: Float!
+  $gameMode: Float!
+  $platform: Platform!
+  $bet: Float!
+  $comment: String!
+  $awayPlayerId:String
+) {
+  Challenge(
+    input: {
+      game: $game
+      gameMode: $gameMode
+      platform: $platform
+      bet: $bet
+      comment: $comment
+      awayPlayerId: $awayPlayerId
+      
+    }
+  ) {
+    ...GeneralResponse
+  }
+}

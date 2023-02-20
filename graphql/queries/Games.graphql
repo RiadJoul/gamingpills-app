@@ -1,0 +1,11 @@
+query Games {
+    games {
+        id,
+        name,
+        category
+        gameModes {
+            id
+            name
+        }
+    }
+}

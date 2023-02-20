@@ -1,0 +1,5 @@
+mutation UnbanPlayer($id:String!) {
+    unbanPlayer(id:$id) {
+        ...GeneralResponse
+    }
+}

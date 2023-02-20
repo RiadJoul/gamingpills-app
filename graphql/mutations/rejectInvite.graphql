@@ -1,0 +1,5 @@
+mutation RejectInvite($id:String!) {
+    rejectInvite(id:$id) {
+        ...GeneralResponse
+    }
+}

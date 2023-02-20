@@ -1,0 +1,9 @@
+query Results($id:String!) {
+	results(id:$id){
+    id
+		homeScore
+    awayScore
+    createdAt
+    updatedAt
+  }
+}

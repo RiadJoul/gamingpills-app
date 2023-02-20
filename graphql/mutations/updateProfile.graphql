@@ -1,0 +1,5 @@
+mutation UpdateProfile($file:Upload!){
+    updateProfile(file:$file) {
+        ...GeneralResponse
+    }
+}
