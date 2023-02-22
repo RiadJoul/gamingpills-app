@@ -39,7 +39,7 @@ const Chat = () => {
                 </div>
                 }
                 </div>
-            
+
 
             </div>
             <div className="pt-4 sm:mb-0">

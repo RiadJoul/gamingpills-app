@@ -32,7 +32,8 @@ const rules = [
         rule: "take a photo of the end-of-game screen with the score and name of each player displayed. (to protect you in the event of a dispute)",
     },
     {
-        id: 0,
+        id: 9,
+        //TODO
         title: "In case of lagging or poor connection",
         rule: "",
     },
