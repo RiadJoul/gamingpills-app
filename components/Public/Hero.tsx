@@ -18,7 +18,7 @@ const Hero = () => {
         <section className="bg-gradient-to-tr from-dark to-black">
             <div className="grid py-8 px-4 mx-auto max-w-screen-xl lg:gap-8 xl:gap-0 lg:py-36 lg:grid-cols-12">
                 <div className="place-self-center mr-auto lg:col-span-7">
-                    <h1 className="mb-1 text-4xl text-gray-100 lg:text-6xl font-semibold">
+                    <h1 className="mb-1 text-3xl text-gray-100 lg:text-6xl font-semibold">
                         Win money <br className="block" />
                         <span
                             className="inline-flex h-20 pt-2 text-primary overflow-x-hidden animate-type group-hover:animate-type-reverse whitespace-nowrap will-change-transform"

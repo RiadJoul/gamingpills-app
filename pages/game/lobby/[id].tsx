@@ -48,9 +48,9 @@ const Match = () => {
         />
       )}
       <PageHead title="Lobby" />
-      <div className="hidden md:block">
-        <TopNavigation />
-      </div>
+
+      <TopNavigation />
+
       <MobileChat isOpen={isChatOpen} close={() => setIsChatOpen(false)} />
       <main className="h-full bg-black grid grid-cols-12">
         <aside className="hidden md:flex flex-col mt-7 col-span-2 items-end text-white shadow mb-5">
@@ -65,11 +65,11 @@ const Match = () => {
               >
                 <IoArrowBack className="font-semibold text-white text-2xl" />
               </div>
-              <div className="flex justify-between">
-                <h1 className="text-base lg:text-lg mb-2 text-white font-semibold">
+              <div className="flex justify-between text-sm lg:text-lg">
+                <h1 className=" mb-2 text-white font-semibold">
                   Match Lobby
                 </h1>
-                <h1 className="mb-2 text-base lg:text-lg text-white font-semibold">
+                <h1 className="mb-2 text-white font-semibold">
                   <span className="text-primary">ID:</span> {data && data.challenge ? id : ''}
                 </h1>
               </div>

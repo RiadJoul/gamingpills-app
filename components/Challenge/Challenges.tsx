@@ -28,7 +28,7 @@ const Challenges = ({ games,challenges }: Props) => {
           {
             games && games.map((game) => (
               <button key={game.id} className={` ${filterSelected == game.id ? 'bg-dark' : 'bg-dark opacity-70'}
-                text-white text-sm md:text-base px-3 py-1 rounded-md transition duration-400`} onClick={() => setFilterSelected(game.id)}>{game.name}</button>
+                text-white text-sm md:text-base px-3 py-1 rounded-md transition duration-400`} onClick={() => setFilterSelected(game.id)}>{game.name.toLocaleUpperCase()}</button>
             ))
           }
       </div>
@@ -46,7 +46,7 @@ const Challenges = ({ games,challenges }: Props) => {
             </div>
           ) : (
             <NoData
-              title={`No ${games.find(x => x.id === filterSelected).name} challenges has been found`}
+              title={`No ${games.find(x => x.id === filterSelected).name.toLocaleUpperCase()} challenges has been found`}
               description="You can create a challenge or find an opponent in the chat"
             />
           ),

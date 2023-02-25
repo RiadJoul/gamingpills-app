@@ -5,6 +5,7 @@ import { GiTakeMyMoney } from "react-icons/gi";
 import { useWithdrawMutation } from "../../generated/graphql";
 import Button from "../shared/Button";
 import Info from "../shared/Info";
+import Input from "../shared/Input";
 import FeedbackModal from "./FeedbackModal";
 
 interface Props {
@@ -119,19 +120,14 @@ const WithdrawModal = (props: Props) => {
                           <label className="block text-left ml-1 text-gray-100 text-sm font-bold mb-2">
                             Amount to withdraw
                           </label>
-                          <input
-                            className="placeholder:text-slate-900 block text-black bg-gray-200 w-full rounded-md py-2 pl-5 pr-3 shadow-sm focus:outline-none sm:text-sm"
-                            placeholder="10.00"
-                            type="text"
-                            onKeyPress={(event) => {
+                          <Input placeholder="10.00" type="text" onKeyPress={(event) => {
                               if (!/[0-9]/.test(event.key)) {
                                 event.preventDefault();
                               }
                             }}
                             onChange={(e) =>
                               setAmount(parseInt(e.target.value))
-                            }
-                          />
+                            } />
                         </div>
                       </div>
 

@@ -22,7 +22,7 @@ function classNames(...classes: string[]) {
 
 const Account = () => {
   useIsAuth();
-  //TODO: Break this into diff components
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [psnId, setPsnId] = useState<string>("");
@@ -158,18 +158,6 @@ const Account = () => {
                       )
                     }
                   >
-                    Information
-                  </Tab>
-                  <Tab
-                    className={({ selected }) =>
-                      classNames(
-                        "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5 text-white",
-                        selected
-                          ? "bg-white shadow text-primary-focus font-semibold"
-                          : "text-blue-100 hover:bg-black hover:text-white"
-                      )
-                    }
-                  >
                     Security
                   </Tab>
                 </Tab.List>
@@ -215,8 +203,6 @@ const Account = () => {
 
                       </div>
                     </div>
-                  </Tab.Panel>
-                  <Tab.Panel className="space-y-2">
                     <div className="p-4 w-full space-y-4 lg:space-y-5 text-center rounded-lg border shadow-md bg-dark border-dark text-sm">
                       <div className="grid grid-cols-6 gap-2 lg:gap-3">
                         <div className="col-span-6 sm:col-span-6">
