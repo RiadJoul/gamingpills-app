@@ -9,7 +9,7 @@ interface Props {
 const MyChallenges = ({ challenges }: Props) => {
 
   return (
-    challenges && challenges.length > 0 && (
+    challenges && (
       <div className="flex flex-col space-y-3 justify-center">
         <h1 className="text-base mb-2 md:text-lg text-primary font-semibold">
           Active Challenge

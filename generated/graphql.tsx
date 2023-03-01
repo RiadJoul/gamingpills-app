@@ -93,7 +93,7 @@ export type Game = {
 
 export type GameMode = {
   __typename?: 'GameMode';
-  Game: Game;
+  Game?: Maybe<Game>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['Float'];
   name: Scalars['String'];
