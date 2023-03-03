@@ -6,7 +6,7 @@ import TopNavigation from "../../components/Navigation/TopNavigation";
 import OnlinePlayers from "../../components/OnlinePlayers/OnlineUsers";
 import PageHead from "../../components/shared/PageHead";
 import Challenges from "../../components/Challenge/Challenges";
-import { useFeedQuery, User, useSendVerificationCodeMutation } from "../../generated/graphql";
+import { Challenge, Game, useFeedQuery, User, useSendVerificationCodeMutation } from "../../generated/graphql";
 import useAuth from "../../services/useAuth";
 import Alert from "../../components/shared/Alert";
 import FeedbackModal from "../../components/Modals/FeedbackModal";
@@ -14,16 +14,16 @@ import Chat from "../../components/Chat/Chat";
 import { useIsAuth } from "../../services/useIsAuth";
 import MyChallenges from "../../components/Challenge/MyChallenges";
 import Loading from "../../components/shared/Loading";
-import Button from "../../components/shared/Button";
 
 
 
 const Feed = () => {
   useIsAuth();
+
+
   //graphql
   const [result, reexecuteQuery] = useFeedQuery();
   const [, sendVerification] = useSendVerificationCodeMutation();
-
   //@ts-ignore
   const { user }: User = useAuth();
   const { data, fetching } = result;
@@ -36,11 +36,13 @@ const Feed = () => {
 
   useEffect(() => {
     const interval = setInterval(() => reexecuteQuery(), 5000);
+
+
+
     return () => {
       clearInterval(interval);
-
     };
-  }, []);
+  }, [result]);
 
   const sendEmail = async () => {
     setLoading(true);
@@ -105,11 +107,12 @@ const Feed = () => {
                       </div>
                     </div>
                   }
-
                   <OnlinePlayers users={data.feed.onlineUsers} />
                   <Games games={data.feed.games} />
                   <MyChallenges challenges={data.feed.myChallenges} />
                   <Challenges games={data.feed.games} challenges={data.feed.challenges} />
+
+
                 </>
               }
             </div>

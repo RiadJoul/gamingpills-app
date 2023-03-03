@@ -93,7 +93,7 @@ export type Game = {
 
 export type GameMode = {
   __typename?: 'GameMode';
-  Game: Game;
+  Game?: Maybe<Game>;
   createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['Float'];
   name: Scalars['String'];
@@ -142,7 +142,7 @@ export type Mutation = {
   deleteGame: GeneralResponse;
   deleteGameMode: GeneralResponse;
   fundWallet: GeneralResponse;
-  login: GeneralResponse;
+  login: User;
   logout: Scalars['Boolean'];
   register: GeneralResponse;
   rejectInvite: GeneralResponse;
@@ -289,6 +289,7 @@ export type MutationUnbanPlayerArgs = {
 
 export type MutationUpdateGameArgs = {
   active: Scalars['Boolean'];
+  file: Scalars['Upload'];
   gameId: Scalars['Float'];
   name: Scalars['String'];
 };
@@ -581,7 +582,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'GeneralResponse', success?: boolean | null, errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, role?: Role | null, banned?: boolean | null, username: string, firstName?: string | null, lastName?: string | null, email?: string | null, emailVerified?: boolean | null, paypal?: string | null, psnId?: string | null, xboxId?: string | null, avatar?: string | null, lastSeen?: any | null, birthDate?: any | null } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -938,10 +939,10 @@ export function useJoinChallengeMutation() {
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
   login(username: $username, password: $password) {
-    ...GeneralResponse
+    ...userFragment
   }
 }
-    ${GeneralResponseFragmentDoc}`;
+    ${UserFragmentFragmentDoc}`;
 
 export function useLoginMutation() {
   return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);

@@ -20,6 +20,9 @@ import MobileChat from "../../../components/Chat/MobileChat";
 
 const Match = () => {
   useIsAuth();
+
+
+
   const router = useRouter();
   const { id } = router.query;
   const variable = {
@@ -76,7 +79,7 @@ const Match = () => {
               {fetching && <Loading />}
               {!fetching && data && data.challenge ? (
                 <>
-                  <ChallengeCard challenge={data.challenge} refetch={checkIfResultsAreUploaded} />
+                  <ChallengeCard user={user} challenge={data.challenge} refetch={checkIfResultsAreUploaded} />
                   <InfoCard challenge={data.challenge} />
                   <FifaRulesCard />
                 </>

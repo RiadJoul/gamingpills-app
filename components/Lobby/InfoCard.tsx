@@ -32,7 +32,7 @@ const InfoCard = ({ challenge }: { challenge: Challenge }) => {
               )}
               <div className="flex justify-between my-2">
                 <div>
-                  <h4>Winner Takes</h4>
+                  <h4>Prize</h4>
                 </div>
                 <div>
                   <div className="mx-4"></div>

@@ -29,12 +29,13 @@ const Login = () => {
     setErrorField(null);
     setErrorMessage(null);
     const response = await login({ username, password });
-    if (response.data?.login.errors) {
-      setErrorField(response.data.login.errors[0].field);
-      setErrorMessage(response.data.login.errors[0].message);
-    } else {
+    if (response.data?.login.id) {
+      localStorage.setItem("id",response.data.login.id)
       setSucess(true);
       setTimeout(() => router.push("/player/feed"), 1000);
+    } else {
+      setErrorField("Error");
+      setErrorMessage("username or password is incorrect");
     }
     setLoading(false);
   };
