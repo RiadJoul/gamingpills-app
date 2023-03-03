@@ -7,8 +7,10 @@ import GamingpillsPoster from "../../components/Public/GamingpillsPoster";
 import Success from "../../components/shared/Success";
 import Error from "../../components/shared/Error";
 import { useRegisterMutation } from "../../generated/graphql";
+import { useIsAuth } from "../../services/useIsAuth";
 
 const SignUp = () => {
+
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   //form
@@ -46,12 +48,13 @@ const SignUp = () => {
       password,
       birthDate,
     });
-    if (response.data?.register.errors) {
-      setErrorField(response.data.register.errors[0].field);
-      setErrorMessage(response.data.register.errors[0].message);
-    } else {
+    if (response.data?.register.user) {
+      localStorage.setItem("id",response.data.register.user.id)
       setSucess(true);
       setTimeout(() => router.push("/player/feed"), 1000);
+    } else {
+      setErrorField(response.data.register.errors[0].field);
+      setErrorMessage(response.data.register.errors[0].message);
     }
     setLoading(false);
   };

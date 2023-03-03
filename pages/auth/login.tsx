@@ -10,8 +10,9 @@ import Error from "../../components/shared/Error";
 import { useLoginMutation } from "../../generated/graphql";
 import Success from "../../components/shared/Success";
 
-const Login = () => {
 
+const Login = () => {
+  
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   //form

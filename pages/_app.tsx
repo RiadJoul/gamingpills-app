@@ -9,6 +9,7 @@ import { Progress } from "../components/shared/ProgressBar/Progress";
 import {useProgressStore} from "../components/shared/ProgressBar/useProgressStore";
 
 function MyApp({ Component, pageProps }) {
+  //TODO: add constants for this
   const wsUrl = 'ws://localhost:4000/graphql';
   const httpUrl = 'http://localhost:4000/graphql';
   

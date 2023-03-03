@@ -10,6 +10,12 @@ mutation Register($username: String!
   email: $email
   password: $password
   birthDate: $birthDate) {
-    ...GeneralResponse
+    errors {
+    field
+    message
+	}
+  user{
+    id
+  }
   }
 }

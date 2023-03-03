@@ -144,7 +144,7 @@ export type Mutation = {
   fundWallet: GeneralResponse;
   login: User;
   logout: Scalars['Boolean'];
-  register: GeneralResponse;
+  register: SignUpResponse;
   rejectInvite: GeneralResponse;
   resetPassword: GeneralResponse;
   resolveChallenge: GeneralResponse;
@@ -420,6 +420,12 @@ export type Scores = {
   updatedAt: Scalars['DateTime'];
 };
 
+export type SignUpResponse = {
+  __typename?: 'SignUpResponse';
+  errors?: Maybe<Array<FieldError>>;
+  user: User;
+};
+
 export type Stats = {
   __typename?: 'Stats';
   betsStats?: Maybe<BetsStats>;
@@ -582,7 +588,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string, role?: Role | null, banned?: boolean | null, username: string, firstName?: string | null, lastName?: string | null, email?: string | null, emailVerified?: boolean | null, paypal?: string | null, psnId?: string | null, xboxId?: string | null, avatar?: string | null, lastSeen?: any | null, birthDate?: any | null } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'User', id: string } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -643,7 +649,7 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'GeneralResponse', success?: boolean | null, errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null } };
+export type RegisterMutation = { __typename?: 'Mutation', register: { __typename?: 'SignUpResponse', errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null, user: { __typename?: 'User', id: string } } };
 
 export type UnbanPlayerMutationVariables = Exact<{
   id: Scalars['String'];
@@ -939,10 +945,10 @@ export function useJoinChallengeMutation() {
 export const LoginDocument = gql`
     mutation Login($username: String!, $password: String!) {
   login(username: $username, password: $password) {
-    ...userFragment
+    id
   }
 }
-    ${UserFragmentFragmentDoc}`;
+    `;
 
 export function useLoginMutation() {
   return Urql.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument);
@@ -1036,10 +1042,16 @@ export const RegisterDocument = gql`
     password: $password
     birthDate: $birthDate
   ) {
-    ...GeneralResponse
+    errors {
+      field
+      message
+    }
+    user {
+      id
+    }
   }
 }
-    ${GeneralResponseFragmentDoc}`;
+    `;
 
 export function useRegisterMutation() {
   return Urql.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument);
