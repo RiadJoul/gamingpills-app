@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BsCash } from "react-icons/bs";
 import { FaPlaystation, FaRegHandshake, FaXbox } from "react-icons/fa";
 import { MdSportsScore } from "react-icons/md";
-import Button from "../shared/Button";
+import Button from "../Shared/Button";
 import { Challenge, Platform, Status } from "../../generated/graphql";
 import { useUploadResultsMutation } from "../../generated/graphql";
 import FeedbackModal from "../Modals/FeedbackModal";

@@ -1,8 +1,8 @@
 import {
   usePlayerDisputedChallengesQuery,
 } from "../../generated/graphql";
-import Loading from "../shared/Loading";
-import NoData from "../shared/NoData";
+import Loading from "../Shared/Loading";
+import NoData from "../Shared/NoData";
 import Challenge from "./Challenge";
 
 const DisputedChallenges = () => {

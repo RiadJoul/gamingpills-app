@@ -12,7 +12,7 @@ const Games = ({games}:Props) => {
     <>
       {games && games.length > 0 && (
         <>
-          <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+          <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
             Games
           </h1>
           <div className="w-full overflow-x-auto mx-auto  shadow-xl">

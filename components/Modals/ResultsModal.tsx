@@ -6,7 +6,7 @@ import {
   useRespondToResultsMutation,
 } from "../../generated/graphql";
 import { useRouter } from "next/router";
-import Button from "../shared/Button";
+import Button from "../Shared/Button";
 
 interface Props {
   show: boolean;

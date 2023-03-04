@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import PageHead from "../../components/shared/PageHead";
+import PageHead from "../../components/Shared/PageHead";
 import { Tab } from "@headlessui/react";
-import ActiveChallenges from "../../components/Challenge/ActiveChallenges";
 import Invites from "../../components/Invite/Invites";
-import FinishedChallenges from "../../components/Challenge/FinishedChallenges";
 import { useMatchesQuery } from "../../generated/graphql";
 import Chat from "../../components/Chat/Chat";
 import { useIsAuth } from "../../services/useIsAuth";
 import useAuth from "../../services/useAuth";
 import { useRouter } from "next/router";
+import ChallengeList from "../../components/Challenge/ChallengeList";
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -22,14 +21,17 @@ const Matches = () => {
   const { index } = router.query;
 
   const [selectedIndex, setSelectedIndex] = useState(index ? index : 0);
+
   const [result] = useMatchesQuery();
+  const { data ,fetching} = result;
 
-
-
-
-  const { data } = result;
   //@ts-ignore
   const {user}:User = useAuth();
+
+  useEffect(() => {
+    if(data)
+      console.log(data)
+  },[data])
   return user && (
     <>
       <PageHead title="Matches" />
@@ -42,7 +44,7 @@ const Matches = () => {
         <div className="col-span-12 md:col-span-6 mt-5 mx-3 lg:mx-5">
           <div className="flex flex-col justify-center">
             <div className="w-full px-2 sm:px-0">
-              <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+              <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
                 Matches
               </h1>
               <Tab.Group
@@ -92,13 +94,19 @@ const Matches = () => {
                   data && <>
                     <Tab.Panels className="mt-2 mb-20">
                       <Tab.Panel className="space-y-2">
-                        <ActiveChallenges challenges={data.matches.activeChallenges} />
+                        {/* <ChallengeList challenges={data.matches.activeChallenges} fetching={fetching} 
+                        noDataTitle={"You have no active challenges"} 
+                        noDataDescription={"You can create a challenge or find an opponent in the chat"}
+                        /> */}
                       </Tab.Panel>
                       <Tab.Panel className="space-y-2">
-                        <Invites invites={data.matches.invites} />
+                      {/* <Invites invites={data.matches.invites} /> */}
                       </Tab.Panel>
                       <Tab.Panel className="space-y-2">
-                        <FinishedChallenges challenges={data.matches.finishedChallenges} />
+                      {/* <ChallengeList challenges={data.matches.finishedChallenges} fetching={fetching} 
+                      noDataTitle={"no challenges has been found"} 
+                      noDataDescription={"You can create a challenge or find an opponent in the chat"}
+                      /> */}
                       </Tab.Panel>
                     </Tab.Panels>
 

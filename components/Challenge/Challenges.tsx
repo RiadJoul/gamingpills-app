@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Challenge as ChallengeType } from "../../generated/graphql";
 import useAuth from "../../services/useAuth";
-import Loading from "../shared/Loading";
-import NoData from "../shared/NoData";
+import Loading from "../Shared/Loading";
+import NoData from "../Shared/NoData";
 import Challenge from "./Challenge";
 import {Game as GameType} from '../../generated/graphql';
 
@@ -21,7 +21,7 @@ const Challenges = ({ games,challenges }: Props) => {
   return (
     <>
     <div className="flex justify-between items-center pt-5">
-      <h1 className="text-base mb-2 md:text-lg text-white font-semibold ">
+      <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
         Challenges
       </h1>
       <div className="space-x-1">

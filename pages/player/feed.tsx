@@ -4,21 +4,28 @@ import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import OnlinePlayers from "../../components/OnlinePlayers/OnlineUsers";
-import PageHead from "../../components/shared/PageHead";
+import PageHead from "../../components/Shared/PageHead";
 import Challenges from "../../components/Challenge/Challenges";
-import { Challenge, Game, useFeedQuery, User, useSendVerificationCodeMutation } from "../../generated/graphql";
+import { useFeedQuery, User, useSendVerificationCodeMutation } from "../../generated/graphql";
 import useAuth from "../../services/useAuth";
-import Alert from "../../components/shared/Alert";
+import Alert from "../../components/Shared/Alert";
 import FeedbackModal from "../../components/Modals/FeedbackModal";
 import Chat from "../../components/Chat/Chat";
 import { useIsAuth } from "../../services/useIsAuth";
 import MyChallenges from "../../components/Challenge/MyChallenges";
-import Loading from "../../components/shared/Loading";
+import Loading from "../../components/Shared/Loading";
+
 
 
 
 const Feed = () => {
   useIsAuth();
+
+  const options = [
+    { value: "option1", label: "Option 1" },
+    { value: "option2", label: "Option 2" },
+    { value: "option3", label: "Option 3" },
+  ];
 
 
   //graphql
@@ -111,7 +118,7 @@ const Feed = () => {
                   <Games games={data.feed.games} />
                   <MyChallenges challenges={data.feed.myChallenges} />
                   <Challenges games={data.feed.games} challenges={data.feed.challenges} />
-
+                 
 
                 </>
               }

@@ -3,8 +3,8 @@ import Image from "next/image";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { usePlayerStatsQuery, User } from "../../generated/graphql";
 
-import Button from "../shared/Button";
-import Loading from "../shared/Loading";
+import Button from "../Shared/Button";
+import Loading from "../Shared/Loading";
 import ChallengeModal from "../Challenge/ChallengeModal";
 
 interface Props {

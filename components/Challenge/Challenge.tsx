@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../shared/Button";
+import Button from "../Shared/Button";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { GiPill, GiSofa } from "react-icons/gi";

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import PageHead from "../../components/shared/PageHead";
+import PageHead from "../../components/Shared/PageHead";
 import { useVerifyEmailMutation } from "../../generated/graphql";
 import { useRouter } from "next/router";
-import Loading from "../../components/shared/Loading";
+import Loading from "../../components/Shared/Loading";
 import {BsCheckCircle} from "react-icons/bs"
 import { MdErrorOutline } from "react-icons/md";
 

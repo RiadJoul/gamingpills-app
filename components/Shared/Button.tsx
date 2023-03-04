@@ -61,7 +61,7 @@ const Button = (props: Props) => {
       disabled={props.loading || props.disabled}
       onClick={props.onClick}
       className={`flex items-center justify-center text-sm lg:text-base font-semibold
-        border border-transparent rounded-md shadow-sm capitalize
+        border border-transparent rounded-md shadow-sm uppercase 
         text-center transition duration-800 ease-in-out transform hover:opacity-70
         ${bgcolorClasses} ${textColorClasses} ${widthClasses} ${sizeClasses}`}
     >

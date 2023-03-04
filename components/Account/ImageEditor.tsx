@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Button from '../shared/Button';
+import Button from '../Shared/Button';
 import { useUpdateProfileMutation } from '../../generated/graphql';
 import useAuth from '../../services/useAuth';
 import FeedbackModal from '../Modals/FeedbackModal';

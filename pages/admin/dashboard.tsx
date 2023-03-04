@@ -4,8 +4,8 @@ import Chart from "../../components/Dashboard/Chart";
 import Stats from "../../components/Dashboard/Stats";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import Loading from "../../components/shared/Loading";
-import PageHead from "../../components/shared/PageHead";
+import Loading from "../../components/Shared/Loading";
+import PageHead from "../../components/Shared/PageHead";
 import { useStatsQuery } from "../../generated/graphql";
 import { useIsAuth } from "../../services/useIsAuth";
 

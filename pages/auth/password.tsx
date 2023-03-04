@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Button from "../../components/shared/Button";
-import Input from "../../components/shared/Input";
-import PageHead from "../../components/shared/PageHead";
+import Button from "../../components/Shared/Button";
+import Input from "../../components/Shared/Input";
+import PageHead from "../../components/Shared/PageHead";
 
 import GamingpillsPoster from "../../components/Public/GamingpillsPoster";
-import Error from "../../components/shared/Error";
+import Error from "../../components/Shared/Error";
 
 import { useSendResetPasswordEmailMutation } from "../../generated/graphql";
-import Success from "../../components/shared/Success";
+import Success from "../../components/Shared/Success";
 
 const Password = () => {
   const [loading, setLoading] = useState<boolean>(false);

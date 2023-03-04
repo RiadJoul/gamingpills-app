@@ -5,16 +5,16 @@ import { BiSearch } from "react-icons/bi";
 import Chat from "../../components/Chat/Chat";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import PageHead from "../../components/shared/PageHead";
+import PageHead from "../../components/Shared/PageHead";
 import { useIsAuth } from "../../services/useIsAuth";
 import Image from "next/image";
 import { useBanPlayerMutation, usePlayerQuery, usePlayersQuery, User, useUnbanPlayerMutation } from "../../generated/graphql";
-import Loading from "../../components/shared/Loading";
-import NoData from "../../components/shared/NoData";
-import Button from "../../components/shared/Button";
+import Loading from "../../components/Shared/Loading";
+import NoData from "../../components/Shared/NoData";
+import Button from "../../components/Shared/Button";
 import FeedbackModal from "../../components/Modals/FeedbackModal";
 import moment from "moment";
-import Input from "../../components/shared/Input";
+import Input from "../../components/Shared/Input";
 
 
 function classNames(...classes: string[]) {

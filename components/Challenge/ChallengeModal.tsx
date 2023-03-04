@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Dialog, Listbox, Transition } from "@headlessui/react";
-import Button from "../shared/Button";
+import Button from "../Shared/Button";
 import { modes, platforms, bets } from "../../services/server";
 import { CgPill } from "react-icons/cg";
 import { BsCash } from "react-icons/bs";
@@ -10,9 +10,10 @@ import { GameMode, useCreateChallengeMutation, useGamesQuery, User } from "../..
 import { useRouter } from "next/router";
 import FeedbackModal from "../Modals/FeedbackModal";
 import useAuth from "../../services/useAuth";
-import Loading from "../shared/Loading";
+import Loading from "../Shared/Loading";
 import { SiFifa, SiNba } from "react-icons/si";
-import { FaFortAwesome } from "react-icons/fa";
+import CarouselSelect from "../Shared/CarouselSelect";
+
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -348,77 +349,7 @@ const ChallengeModal = (props: Props) => {
                                     Bet
                                   </Listbox.Label>
                                   <div className="mt-1 relative">
-                                    <Listbox.Button className="relative uppercase w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-primary-focus focus:border-primary-focus text-sm">
-                                      <span className="flex items-center">
-                                        <span className="text-lg lg:text-xl text-green-700">
-                                          <BsCash />
-                                        </span>
-
-                                        <span className="ml-3 block truncate text-sm lg:text-base">
-                                          {betSelected}$
-                                        </span>
-                                      </span>
-                                    </Listbox.Button>
-
-                                    <Transition
-                                      show={open}
-                                      as={Fragment}
-                                      leave="transition ease-in duration-100"
-                                      leaveFrom="opacity-100"
-                                      leaveTo="opacity-0"
-                                    >
-                                      <Listbox.Options className="absolute z-10 uppercase mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm">
-                                        {bets.map((bet) => (
-                                          <Listbox.Option
-                                            key={bet}
-                                            className={({ active }) =>
-                                              classNames(
-                                                active
-                                                  ? "text-white bg-primary-focus"
-                                                  : "text-gray-900",
-                                                "cursor-default select-none relative py-2 pl-3 pr-9"
-                                              )
-                                            }
-                                            value={bet}
-                                          >
-                                            {({ selected, active }) => (
-                                              <>
-                                                <div className="flex items-center">
-                                                  <span className="text-lg lg:text-xl">
-                                                    <BsCash />
-                                                  </span>
-                                                  <span
-                                                    className={classNames(
-                                                      selected
-                                                        ? "font-semibold"
-                                                        : "font-normal",
-                                                      "ml-3 block truncate text-sm lg:text-base"
-                                                    )}
-                                                  >
-                                                    {bet}$
-                                                  </span>
-                                                </div>
-
-                                                {selected ? (
-                                                  <span
-                                                    className={classNames(
-                                                      active
-                                                        ? "text-white"
-                                                        : "text-primary-focus",
-                                                      "absolute inset-y-0 right-0 flex items-center pr-4"
-                                                    )}
-                                                  >
-                                                    <span className="text-lg lg:text-xl">
-                                                      <CgPill />
-                                                    </span>
-                                                  </span>
-                                                ) : null}
-                                              </>
-                                            )}
-                                          </Listbox.Option>
-                                        ))}
-                                      </Listbox.Options>
-                                    </Transition>
+                                    <CarouselSelect options={bets}/>
                                   </div>
                                 </>
                               )}

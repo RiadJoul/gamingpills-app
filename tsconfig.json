@@ -24,7 +24,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "next.config.js", "components/shared/ProgressBar"  ],
+, "next.config.js", "components/Shared/ProgressBar"  ],
   "exclude": [
     "node_modules"
   ]

@@ -1,8 +1,8 @@
 import React from "react";
 import { Status, Type, useTransactionsQuery } from "../../generated/graphql";
 import format from "../../services/dateFormatter";
-import Loading from "../shared/Loading";
-import NoData from "../shared/NoData";
+import Loading from "../Shared/Loading";
+import NoData from "../Shared/NoData";
 
 const Transactions = () => {
   const [result] = useTransactionsQuery();
@@ -10,7 +10,7 @@ const Transactions = () => {
   const { data, fetching } = result;
   return (
     <>
-      <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+      <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
         Transactions:
       </h1>
 

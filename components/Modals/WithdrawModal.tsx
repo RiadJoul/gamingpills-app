@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import React, { Fragment, useRef, useState } from "react";
 import { GiTakeMyMoney } from "react-icons/gi";
 import { useWithdrawMutation } from "../../generated/graphql";
-import Button from "../shared/Button";
-import Info from "../shared/Info";
-import Input from "../shared/Input";
+import Button from "../Shared/Button";
+import Info from "../Shared/Info";
+import Input from "../Shared/Input";
 import FeedbackModal from "./FeedbackModal";
 
 interface Props {

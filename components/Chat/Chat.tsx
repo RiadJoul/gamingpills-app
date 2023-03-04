@@ -53,7 +53,7 @@ const Chat = () => {
                         onKeyDown={handleKeyDown}
                         required
                     />
-                    <button className="bg-primary p-2 mx-1 text-white rounded-md hover:bg-primary-focus"
+                    <button className="bg-primary p-2 mx-1 text-white rounded-md hover:bg-primary-focus font-semibold uppercase"
                         onClick={() => {
                           setMessages([...messages, message]);
                           ref.current.value = '';

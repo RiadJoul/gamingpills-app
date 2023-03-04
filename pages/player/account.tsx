@@ -4,9 +4,9 @@ import Image from "next/image";
 import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import Button from "../../components/shared/Button";
-import PageHead from "../../components/shared/PageHead";
-import Input from "../../components/shared/Input";
+import Button from "../../components/Shared/Button";
+import PageHead from "../../components/Shared/PageHead";
+import Input from "../../components/Shared/Input";
 import {
   useChangePasswordMutation,
   useUpdateUserMutation,
@@ -128,7 +128,7 @@ const Account = () => {
 
           <div className="col-span-12 md:col-span-6 mt-5">
             <div className="flex flex-col justify-center mx-3 lg:mx-5 pb-16">
-              <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+              <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
                 Account
               </h1>
               <Tab.Group
@@ -163,7 +163,7 @@ const Account = () => {
                 </Tab.List>
                 <Tab.Panels className="mt-2">
                   <Tab.Panel className="space-y-2">
-                    <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+                    <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
                       Avatar:
                     </h1>
                     <div className="py-10 w-full text-center rounded-lg border shadow-md bg-dark border-dark">

@@ -4,8 +4,8 @@ import { AiOutlineLock } from "react-icons/ai";
 import { options } from "../../services/server";
 import CheckoutModal from "../Modals/CheckoutModal";
 import FeedbackModal from "../Modals/FeedbackModal";
-import Button from "../shared/Button";
-import Info from "../shared/Info";
+import Button from "../Shared/Button";
+import Info from "../Shared/Info";
 
 
 
@@ -47,7 +47,7 @@ const PaymentOptions = () => {
       <CheckoutModal show={showModal} close={() => setShowModal(false)} amount={amountSelected} />
       <div className="bg-dark p-4 lg:p-8 rounded-xl w-full space-y-5">
         <div className="w-full">
-          <h1 className="text-base mb-2 text-white font-semibold">
+          <h1 className="text-base mb-2 text-white font-semibold uppercase">
             Payment amount:
           </h1>
 
@@ -61,7 +61,7 @@ const PaymentOptions = () => {
           </div>
         </div>
         <div className="w-full">
-          <h1 className="mb-2 text-white font-semibold">
+          <h1 className="mb-2 text-white font-semibold uppercase">
             Payment options:
           </h1>
           <RadioGroup value={optionSelected} onChange={setOptionSelected}>

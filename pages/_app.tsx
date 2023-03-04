@@ -5,8 +5,8 @@ import { AuthProvider } from "../services/useAuth";
 import "../styles/globals.css";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { Progress } from "../components/shared/ProgressBar/Progress";
-import {useProgressStore} from "../components/shared/ProgressBar/useProgressStore";
+import { Progress } from "../components/Shared/ProgressBar/Progress";
+import {useProgressStore} from "../components/Shared/ProgressBar/useProgressStore";
 
 function MyApp({ Component, pageProps }) {
   //TODO: add constants for this

@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { RiHandCoinLine } from "react-icons/ri";
 import { useWalletQuery } from "../../generated/graphql";
 import WithdrawModal from "../Modals/WithdrawModal";
-import Button from "../shared/Button";
-import Info from "../shared/Info";
-import Loading from "../shared/Loading";
+import Button from "../Shared/Button";
+import Info from "../Shared/Info";
+import Loading from "../Shared/Loading";
 
 const WalletBalance = () => {
   const [showWithdrawModal, setWithdrawModal] = useState(false);
@@ -26,7 +26,7 @@ const WalletBalance = () => {
             show={showWithdrawModal}
             close={() => setWithdrawModal(false)}
           />
-          <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+          <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
             Balance:
           </h1>
           <div className="bg-dark p-4 lg:p-8 rounded-lg w-full space-y-5">

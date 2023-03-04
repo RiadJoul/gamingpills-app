@@ -1,6 +1,6 @@
 import React from "react"
 import PublicNavigation from "../components/Navigation/PublicNavigation";
-import PageHead from "../components/shared/PageHead";
+import PageHead from "../components/Shared/PageHead";
 
 
 const general = [

@@ -3,8 +3,8 @@ import Chat from "../../components/Chat/Chat";
 import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import NoData from "../../components/shared/NoData";
-import PageHead from "../../components/shared/PageHead";
+import NoData from "../../components/Shared/NoData";
+import PageHead from "../../components/Shared/PageHead";
 import { useIsAuth } from "../../services/useIsAuth";
 import useAuth from "../../services/useAuth";
 import { User } from "../../generated/graphql";
@@ -24,7 +24,7 @@ const Tournaments = () => {
         <div className="col-span-12 md:col-span-6 mt-5">
           <div className="flex flex-col justify-center mx-3 lg:mx-5 pb-16">
             <div className="space-y-4">
-              <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+              <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
                 Upcoming Tournaments
               </h1>
               <NoData

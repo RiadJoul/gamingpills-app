@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MdOutlineMenu } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
-import Button from "../shared/Button";
+import Button from "../Shared/Button";
 import { AdminNavigationItems, PlayerNavigationItems } from "./NavigationItems";
 import { IoExitOutline } from "react-icons/io5";
 import NavigationItem from "./NavigationItem";
