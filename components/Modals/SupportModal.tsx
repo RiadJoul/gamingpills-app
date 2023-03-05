@@ -2,7 +2,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gamingpills from "../../public/images/logo/gamingpills.svg";
-import Button from "../Shared/Button";
+import Button from "../shared/Button";
 import { IoMailOpenOutline } from "react-icons/io5";
 import { FaDiscord } from "react-icons/fa";
 interface Props {

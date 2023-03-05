@@ -1,5 +1,22 @@
 query AuthenticatedUser {
     AuthenticatedUser {
-        ...userFragment
+        id
+        role
+        banned
+        username
+        firstName
+        lastName
+        email
+        emailVerified
+        paypal
+        psnId
+        xboxId
+        avatar
+        lastSeen
+        birthDate
+        
+        Wallet {
+            balance
+        }
     }
 }

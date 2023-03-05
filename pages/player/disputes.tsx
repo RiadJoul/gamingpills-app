@@ -3,7 +3,7 @@ import Chat from "../../components/Chat/Chat";
 import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import PageHead from "../../components/Shared/PageHead";
+import PageHead from "../../components/shared/PageHead";
 import { useIsAuth } from "../../services/useIsAuth";
 import useAuth from "../../services/useAuth";
 import { usePlayerDisputedChallengesQuery, User } from "../../generated/graphql";

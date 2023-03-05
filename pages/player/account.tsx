@@ -4,9 +4,9 @@ import Image from "next/image";
 import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import Button from "../../components/Shared/Button";
-import PageHead from "../../components/Shared/PageHead";
-import Input from "../../components/Shared/Input";
+import Button from "../../components/shared/Button";
+import PageHead from "../../components/shared/PageHead";
+import Input from "../../components/shared/Input";
 import {
   useChangePasswordMutation,
   useUpdateUserMutation,

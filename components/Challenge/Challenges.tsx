@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Challenge as ChallengeType } from "../../generated/graphql";
 import useAuth from "../../services/useAuth";
-import Loading from "../Shared/Loading";
-import NoData from "../Shared/NoData";
+import Loading from "../shared/Loading";
+import NoData from "../shared/NoData";
 import Challenge from "./Challenge";
 import {Game as GameType} from '../../generated/graphql';
 

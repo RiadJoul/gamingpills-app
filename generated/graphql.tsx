@@ -700,7 +700,7 @@ export type WithdrawMutation = { __typename?: 'Mutation', withdraw: { __typename
 export type AuthenticatedUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AuthenticatedUserQuery = { __typename?: 'Query', AuthenticatedUser?: { __typename?: 'User', id: string, role?: Role | null, banned?: boolean | null, username: string, firstName?: string | null, lastName?: string | null, email?: string | null, emailVerified?: boolean | null, paypal?: string | null, psnId?: string | null, xboxId?: string | null, avatar?: string | null, lastSeen?: any | null, birthDate?: any | null } | null };
+export type AuthenticatedUserQuery = { __typename?: 'Query', AuthenticatedUser?: { __typename?: 'User', id: string, role?: Role | null, banned?: boolean | null, username: string, firstName?: string | null, lastName?: string | null, email?: string | null, emailVerified?: boolean | null, paypal?: string | null, psnId?: string | null, xboxId?: string | null, avatar?: string | null, lastSeen?: any | null, birthDate?: any | null, Wallet?: { __typename?: 'Wallet', balance: number } | null } | null };
 
 export type PlayerDisputedChallengesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -776,11 +776,6 @@ export type SearchPlayerQueryVariables = Exact<{
 
 
 export type SearchPlayerQuery = { __typename?: 'Query', searchPlayer: Array<{ __typename?: 'User', id: string, username: string, avatar?: string | null }> };
-
-export type WalletQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type WalletQuery = { __typename?: 'Query', wallet?: { __typename?: 'Wallet', id: number, balance: number } | null };
 
 export type WalletsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1125,10 +1120,26 @@ export function useWithdrawMutation() {
 export const AuthenticatedUserDocument = gql`
     query AuthenticatedUser {
   AuthenticatedUser {
-    ...userFragment
+    id
+    role
+    banned
+    username
+    firstName
+    lastName
+    email
+    emailVerified
+    paypal
+    psnId
+    xboxId
+    avatar
+    lastSeen
+    birthDate
+    Wallet {
+      balance
+    }
   }
 }
-    ${UserFragmentFragmentDoc}`;
+    `;
 
 export function useAuthenticatedUserQuery(options?: Omit<Urql.UseQueryArgs<AuthenticatedUserQueryVariables>, 'query'>) {
   return Urql.useQuery<AuthenticatedUserQuery>({ query: AuthenticatedUserDocument, ...options });
@@ -1534,18 +1545,6 @@ export const SearchPlayerDocument = gql`
 
 export function useSearchPlayerQuery(options: Omit<Urql.UseQueryArgs<SearchPlayerQueryVariables>, 'query'>) {
   return Urql.useQuery<SearchPlayerQuery>({ query: SearchPlayerDocument, ...options });
-};
-export const WalletDocument = gql`
-    query Wallet {
-  wallet {
-    id
-    balance
-  }
-}
-    `;
-
-export function useWalletQuery(options?: Omit<Urql.UseQueryArgs<WalletQueryVariables>, 'query'>) {
-  return Urql.useQuery<WalletQuery>({ query: WalletDocument, ...options });
 };
 export const WalletsDocument = gql`
     query Wallets {

@@ -12,10 +12,17 @@ const Message = ({ text, user }: Props) => {
     //TODD: change styling for admin
     return (
         user &&
-        <div className="flex space-x-1 text-white items-start">
-            <span className="text-gray-300 font-semibold text-xs mt-0.5">1 min ago</span> <p className="text-primary pr-1">{user.username}</p>:<span className="text-white">{text}</span>
+        <div
+            className="text-sm py-1 px-1 rounded hover:bg-gray-500/30 leading-6"
+        >
+            <div className="inline-flex items-baseline">
+            <p className=" text-gray-400 mr-1 text-xs">12:34 PM</p>
+                <span className="font-bold text-primary mr-1">
+                    {user.username}:
+                </span>
+            </div>
+            <span className="break-words text-white">{text}</span>
         </div>
-
     )
 }
 

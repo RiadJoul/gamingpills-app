@@ -1,21 +1,22 @@
 
 import React, { useState } from "react";
 import { RiHandCoinLine } from "react-icons/ri";
-import { useWalletQuery } from "../../generated/graphql";
+import { User } from "../../generated/graphql";
+import useAuth from "../../services/useAuth";
 import WithdrawModal from "../Modals/WithdrawModal";
-import Button from "../Shared/Button";
-import Info from "../Shared/Info";
-import Loading from "../Shared/Loading";
+import Button from "../shared/Button";
+import Info from "../shared/Info";
+import Loading from "../shared/Loading";
 
 const WalletBalance = () => {
   const [showWithdrawModal, setWithdrawModal] = useState(false);
 
-  const [result] = useWalletQuery();
+  //@ts-ignore
+  const { user }: User = useAuth();
 
-  const { data, fetching } = result;
   return (
     <>
-      {fetching ? (
+      {!user ? (
         <Loading />
       ) : (
         <>
@@ -32,7 +33,7 @@ const WalletBalance = () => {
           <div className="bg-dark p-4 lg:p-8 rounded-lg w-full space-y-5">
             <div className="flex justify-center w-full">
               <div className="bg-opacity-20 rounded-xl px-10 py-5">
-                <h1 className="text-white font-semibold text-5xl">$ {data.wallet.balance}.00</h1>
+                <h1 className="text-white font-semibold text-5xl">$ {user.Wallet.balance}.00</h1>
               </div>
             </div>
             <div className="flex justify-center">

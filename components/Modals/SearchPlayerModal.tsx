@@ -1,10 +1,10 @@
 import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { User, useSearchPlayerQuery } from "../../generated/graphql";
-import Button from "../Shared/Button";
-import Input from "../Shared/Input";
+import Button from "../shared/Button";
+import Input from "../shared/Input";
 import Image from "next/image";
-import NoData from "../Shared/NoData";
+import NoData from "../shared/NoData";
 
 interface Props {
   setAwayPlayer: any;

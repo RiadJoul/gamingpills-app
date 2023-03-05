@@ -6,7 +6,7 @@ import { GiPill } from "react-icons/gi";
 import { Challenge, Platform, useJoinChallengeMutation, useRejectInviteMutation } from "../../generated/graphql";
 import FeedbackModal from "../Modals/FeedbackModal";
 import SupportModal from "../Modals/SupportModal";
-import Button from "../Shared/Button";
+import Button from "../shared/Button";
 import { useCountdown } from "../../hooks/useCountdown";
 import { BsClock } from "react-icons/bs";
 

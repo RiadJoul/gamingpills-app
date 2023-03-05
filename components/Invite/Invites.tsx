@@ -1,6 +1,6 @@
 import { Challenge } from "../../generated/graphql";
-import Loading from "../Shared/Loading";
-import NoData from "../Shared/NoData";
+import Loading from "../shared/Loading";
+import NoData from "../shared/NoData";
 import Invite from "./Invite";
 
 interface Props {

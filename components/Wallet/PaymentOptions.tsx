@@ -4,8 +4,8 @@ import { AiOutlineLock } from "react-icons/ai";
 import { options } from "../../services/server";
 import CheckoutModal from "../Modals/CheckoutModal";
 import FeedbackModal from "../Modals/FeedbackModal";
-import Button from "../Shared/Button";
-import Info from "../Shared/Info";
+import Button from "../shared/Button";
+import Info from "../shared/Info";
 
 
 

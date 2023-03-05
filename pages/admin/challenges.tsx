@@ -5,16 +5,16 @@ import { BiSearch } from "react-icons/bi";
 import Chat from "../../components/Chat/Chat";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import Loading from "../../components/Shared/Loading";
-import NoData from "../../components/Shared/NoData";
-import PageHead from "../../components/Shared/PageHead";
+import Loading from "../../components/shared/Loading";
+import NoData from "../../components/shared/NoData";
+import PageHead from "../../components/shared/PageHead";
 import { Challenge as ChallengeType, Status, useChallengeQuery, useChallengesQuery, useResolveChallengeMutation } from "../../generated/graphql";
 import { useIsAuth } from "../../services/useIsAuth";
 import Image from "next/image";
-import Input from "../../components/Shared/Input";
-import Button from "../../components/Shared/Button";
-import Success from "../../components/Shared/Success";
-import Error from "../../components/Shared/Error";
+import Input from "../../components/shared/Input";
+import Button from "../../components/shared/Button";
+import Success from "../../components/shared/Success";
+import Error from "../../components/shared/Error";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");

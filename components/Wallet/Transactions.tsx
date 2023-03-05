@@ -1,8 +1,8 @@
 import React from "react";
 import { Status, Type, useTransactionsQuery } from "../../generated/graphql";
 import format from "../../services/dateFormatter";
-import Loading from "../Shared/Loading";
-import NoData from "../Shared/NoData";
+import Loading from "../shared/Loading";
+import NoData from "../shared/NoData";
 
 const Transactions = () => {
   const [result] = useTransactionsQuery();

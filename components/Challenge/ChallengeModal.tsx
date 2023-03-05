@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Dialog, Listbox, Transition } from "@headlessui/react";
-import Button from "../Shared/Button";
+import Button from "../shared/Button";
 import { modes, platforms, bets } from "../../services/server";
 import { CgPill } from "react-icons/cg";
 import { BsCash } from "react-icons/bs";
@@ -10,9 +10,9 @@ import { GameMode, useCreateChallengeMutation, useGamesQuery, User } from "../..
 import { useRouter } from "next/router";
 import FeedbackModal from "../Modals/FeedbackModal";
 import useAuth from "../../services/useAuth";
-import Loading from "../Shared/Loading";
+import Loading from "../shared/Loading";
 import { SiFifa, SiNba } from "react-icons/si";
-import CarouselSelect from "../Shared/CarouselSelect";
+import CarouselSelect from "../shared/CarouselSelect";
 
 
 function classNames(...classes: string[]) {

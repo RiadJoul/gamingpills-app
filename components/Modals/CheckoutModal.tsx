@@ -2,7 +2,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useRef, useState } from "react";
 import { RiGamepadLine } from "react-icons/ri";
 import PaypalSDK from "../CheckoutProcessors/PaypalSDK";
-import Loading from "../Shared/Loading";
+import Loading from "../shared/Loading";
 
 interface Props {
   amount: number;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
-import PageHead from "../../components/Shared/PageHead";
+import PageHead from "../../components/shared/PageHead";
 import { Tab } from "@headlessui/react";
 import Invites from "../../components/Invite/Invites";
 import { useMatchesQuery } from "../../generated/graphql";

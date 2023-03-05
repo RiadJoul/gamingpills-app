@@ -4,29 +4,23 @@ import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import OnlinePlayers from "../../components/OnlinePlayers/OnlineUsers";
-import PageHead from "../../components/Shared/PageHead";
+import PageHead from "../../components/shared/PageHead";
 import Challenges from "../../components/Challenge/Challenges";
 import { useFeedQuery, User, useSendVerificationCodeMutation } from "../../generated/graphql";
 import useAuth from "../../services/useAuth";
-import Alert from "../../components/Shared/Alert";
+import Alert from "../../components/shared/Alert";
 import FeedbackModal from "../../components/Modals/FeedbackModal";
 import Chat from "../../components/Chat/Chat";
 import { useIsAuth } from "../../services/useIsAuth";
 import MyChallenges from "../../components/Challenge/MyChallenges";
-import Loading from "../../components/Shared/Loading";
-
+import Loading from "../../components/shared/Loading";
+import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
+import Image from "next/image";
 
 
 
 const Feed = () => {
   useIsAuth();
-
-  const options = [
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-    { value: "option3", label: "Option 3" },
-  ];
-
 
   //graphql
   const [result, reexecuteQuery] = useFeedQuery();
@@ -40,7 +34,7 @@ const Feed = () => {
   const [errorField, setErrorField] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [success, setSucess] = useState<boolean>(false);
-
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => reexecuteQuery(), 5000);
 
@@ -130,6 +124,7 @@ const Feed = () => {
           <Chat />
         </div>
       </main>
+      
     </>
   );
 };

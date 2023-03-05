@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import Button from "../../components/Shared/Button";
-import Input from "../../components/Shared/Input";
-import PageHead from "../../components/Shared/PageHead";
+import Button from "../../components/shared/Button";
+import Input from "../../components/shared/Input";
+import PageHead from "../../components/shared/PageHead";
 
 import GamingpillsPoster from "../../components/Public/GamingpillsPoster";
-import Error from "../../components/Shared/Error";
+import Error from "../../components/shared/Error";
 
 import { useSendResetPasswordEmailMutation } from "../../generated/graphql";
-import Success from "../../components/Shared/Success";
+import Success from "../../components/shared/Success";
 
 const Password = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -67,7 +67,7 @@ const Password = () => {
                 {success && (
                   <Success
                     message={"email sent!"}
-                    description="check you email inbox for further instructions"
+                    description="Check your email inbox for further instructions"
                   />
                 )}
               </div>

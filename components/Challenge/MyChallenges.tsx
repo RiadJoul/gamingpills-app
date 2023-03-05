@@ -7,8 +7,7 @@ interface Props {
 }
 
 const MyChallenges = ({ challenges }: Props) => {
-  console.log(challenges
-    )
+
   return (
     challenges.length > 0 && (
       <div className="flex flex-col space-y-3 justify-center">

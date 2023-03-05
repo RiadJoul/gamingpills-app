@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Button from "../../components/Shared/Button";
-import Input from "../../components/Shared/Input";
-import PageHead from "../../components/Shared/PageHead";
+import Button from "../../components/shared/Button";
+import Input from "../../components/shared/Input";
+import PageHead from "../../components/shared/PageHead";
 import GamingpillsPoster from "../../components/Public/GamingpillsPoster";
-import Success from "../../components/Shared/Success";
-import Error from "../../components/Shared/Error";
+import Success from "../../components/shared/Success";
+import Error from "../../components/shared/Error";
 import { useRegisterMutation } from "../../generated/graphql";
 import { useIsAuth } from "../../services/useIsAuth";
 

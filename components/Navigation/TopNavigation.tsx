@@ -4,13 +4,13 @@ import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MdOutlineMenu } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
-import Button from "../Shared/Button";
+import Button from "../shared/Button";
 import { AdminNavigationItems, PlayerNavigationItems } from "./NavigationItems";
 import { IoExitOutline } from "react-icons/io5";
 import NavigationItem from "./NavigationItem";
 import useAuth from "../../services/useAuth";
 import Notifications from "../Notifications/Notifications";
-import { Role, useLogoutMutation, useWalletQuery } from "../../generated/graphql";
+import { Role, useLogoutMutation } from "../../generated/graphql";
 import { useRouter } from "next/router";
 
 
@@ -30,14 +30,13 @@ const TopNavigation = () => {
   const {user}:User = useAuth();
 
   const [balance,setBalance] = useState<number>();
-  //graphql
-  const [res] = useWalletQuery();
+
 
   useEffect(() => {
-    if(user && res.data && user.role == Role.Player) {
-      setBalance(res.data.wallet.balance);
+    if(user && user.role == Role.Player) {
+      setBalance(user.Wallet.balance);
     }
-  },[res])
+  },[user])
 
   return (
     user &&

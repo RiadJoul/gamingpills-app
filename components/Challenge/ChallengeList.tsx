@@ -1,7 +1,7 @@
 import React from "react";
 import { Challenge as ChallengeType } from "../../generated/graphql";
-import Loading from "../Shared/Loading";
-import NoData from "../Shared/NoData";
+import Loading from "../shared/Loading";
+import NoData from "../shared/NoData";
 import Challenge from "./Challenge";
 
 interface Props {
