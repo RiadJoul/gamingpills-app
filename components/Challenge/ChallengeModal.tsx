@@ -4,7 +4,6 @@ import { Dialog, Listbox, Transition } from "@headlessui/react";
 import Button from "../shared/Button";
 import { modes, platforms, bets } from "../../services/server";
 import { CgPill } from "react-icons/cg";
-import { BsCash } from "react-icons/bs";
 import SearchPlayerModal from "../Modals/SearchPlayerModal";
 import { GameMode, useCreateChallengeMutation, useGamesQuery, User } from "../../generated/graphql";
 import { useRouter } from "next/router";
@@ -12,7 +11,7 @@ import FeedbackModal from "../Modals/FeedbackModal";
 import useAuth from "../../services/useAuth";
 import Loading from "../shared/Loading";
 import { SiFifa, SiNba } from "react-icons/si";
-import CarouselSelect from "../shared/CarouselSelect";
+import CarouselSelect from "../shared/BetsCarousel";
 
 
 function classNames(...classes: string[]) {
@@ -165,7 +164,7 @@ const ChallengeModal = (props: Props) => {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="relative rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg w-full">
-                  {fetching ? <Loading /> : <div className="bg-dark font-primary px-4 sm:p-6 rounded-lg">
+                  {!data ? <Loading /> : <div className="bg-dark font-primary px-4 sm:p-6 rounded-lg">
                     <div>
                       <form>
                         <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -349,7 +348,7 @@ const ChallengeModal = (props: Props) => {
                                     Bet
                                   </Listbox.Label>
                                   <div className="mt-1 relative">
-                                    <CarouselSelect options={bets}/>
+                                    <CarouselSelect bets={bets} setBet={(bet:number) => {setBetSelected(bet)}}/>
                                   </div>
                                 </>
                               )}

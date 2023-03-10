@@ -30,7 +30,7 @@ const Wallet = () => {
 
         <div className="col-span-12 md:col-span-6 mt-5">
           <div className="flex flex-col justify-center mx-3 lg:mx-5 pb-16">
-            <h1 className="text-base mb-2 md:text-lg text-white font-semibold">
+            <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
               Wallet
             </h1>
             <Tab.Group
@@ -76,9 +76,9 @@ const Wallet = () => {
           </div>
           <FooterNavigation />
         </div>
-        <div className="hidden md:flex col-span-3 h-screen mt-5 pb-36">
+        
               <Chat/>
-        </div>
+       
       </main>
     </>
   );

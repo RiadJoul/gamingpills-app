@@ -371,7 +371,6 @@ export type Query = {
   transactions: Array<Transaction>;
   user?: Maybe<User>;
   users: Array<User>;
-  wallet?: Maybe<Wallet>;
   wallets: Wallets;
 };
 

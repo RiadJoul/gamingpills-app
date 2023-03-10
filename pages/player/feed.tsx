@@ -120,9 +120,9 @@ const Feed = () => {
           </div>
           <FooterNavigation />
         </div>
-        <div className="hidden md:flex col-span-3 h-screen mt-5 pb-36">
+        
           <Chat />
-        </div>
+        
       </main>
       
     </>

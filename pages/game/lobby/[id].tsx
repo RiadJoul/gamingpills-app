@@ -79,7 +79,7 @@ const Match = () => {
               {fetching && <Loading />}
               {!fetching && data && data.challenge ? (
                 <>
-                  <ChallengeCard user={user} challenge={data.challenge} refetch={checkIfResultsAreUploaded} />
+                  <ChallengeCard  challenge={data.challenge} refetch={checkIfResultsAreUploaded} />
                   <InfoCard challenge={data.challenge} />
                   <FifaRulesCard />
                 </>
@@ -92,9 +92,9 @@ const Match = () => {
             </div>
           </div>
         </div>
-        <div className="hidden md:flex col-span-3 h-screen mt-5 pb-36">
+        
           <Chat />
-        </div>
+      
         <div className='fixed bottom-0 w-full md:hidden'>
           <button className='bottom-0 my-8 text-base flex mr-10 items-center float-right px-5 py-2 bg-primary text-white font-bold tracking-wide rounded-md focus:outline-none' onClick={() => setIsChatOpen(true
           )}>Chat <BsChatLeftText className="ml-2" /></button>

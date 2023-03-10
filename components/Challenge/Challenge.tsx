@@ -16,6 +16,7 @@ import {
 import SupportModal from "../Modals/SupportModal";
 import useAuth from "../../services/useAuth";
 import { useCountdown } from "../../hooks/useCountdown";
+import calculateProfit from "../../services/Fee";
 
 const Challenge = ({ challenge }: { challenge: Challenge }) => {
   //@ts-ignore
@@ -200,7 +201,7 @@ const Challenge = ({ challenge }: { challenge: Challenge }) => {
 
                 </span> : <h1 className="text-base absolute mt-6 mx-5 items-center lg:text-xl text-white font-bold flex flex-col justify-center">
                   <span className="bg-black text-primary font-semibold uppercase px-2.5 py-0.5 rounded">
-                    {challenge.bet}$
+                    {calculateProfit(challenge.bet)}$
                   </span>
                 </h1>
             }

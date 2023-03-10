@@ -8,6 +8,7 @@ const general = [
     { question: "How Do I sign up?", answer: "Signing up to Gamingpills is easy and free! Just click on sign up at the top right corner. Must be 18 years or older" },
     { question: "Does it cost anything to sign up?", answer: "Nope, signing up to Gamingpills is completely free!" },
     { question: "What video games does Gamingpills support?", answer: "Currently we support FIFA and NBA games" },
+
 ]
 
 
@@ -24,34 +25,20 @@ const Faq = () => {
 
                         <div>
                             <h2 className="mb-8 text-2xl tracking-tight font-extrabold text-primary uppercase">General</h2>
-                            
-                                {
-                                    general.map((question) => (
-                                        <div className="mb-10">
-                                            <h3 className="flex items-center text-lg font-medium text-white">
-                                                <Sign/>
-                                                {question.question}
-                                            </h3>
-                                            <p className="text-gray-400">{question.answer}</p>
-                                        </div>
-                                    ))
-                                }
+
+                            {
+                                general.map((question,index) => (
+                                    <div key={index} className="mb-10">
+                                        <h3 className="flex items-center text-lg font-medium text-white">
+                                            <Sign />
+                                            {question.question}
+                                        </h3>
+                                        <p className="text-gray-400">{question.answer}</p>
+                                    </div>
+                                ))
+                            }
                         </div>
-                        <div>
-                            <h2 className="mb-8 text-2xl tracking-tight font-extrabold text-primary uppercase">General</h2>
-                            
-                                {
-                                    general.map((question) => (
-                                        <div className="mb-10">
-                                            <h3 className="flex items-center text-lg font-medium text-white">
-                                                <Sign/>
-                                                {question.question}
-                                            </h3>
-                                            <p className="text-gray-400">{question.answer}</p>
-                                        </div>
-                                    ))
-                                }
-                        </div>
+                        
                     </div>
                 </div>
             </section>

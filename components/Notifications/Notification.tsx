@@ -27,6 +27,9 @@ const getNavigation = (title: string) => {
         case "Challenge Disputed":
             return "/player/disputes"
             break;
+        case "Score uploaded":
+            return "/player/matches"
+        break;
         default:
             return "/player/feed"
             break;

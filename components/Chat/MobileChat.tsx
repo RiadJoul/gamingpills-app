@@ -3,6 +3,7 @@ import { User } from "../../generated/graphql";
 import useAuth from "../../services/useAuth";
 import Message from "./Message";
 import { ImCross } from "react-icons/im"
+import Chance from "chance";
 
 interface Props {
   isOpen: boolean,
@@ -27,6 +28,15 @@ const MobileChat = ({ isOpen, close }: Props) => {
     window.addEventListener("resize", handleResize)
   })
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMessages((prevMessages) => [
+        Chance().sentence(),
+        ...prevMessages,
+      ]);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
 
   const ref = useRef(null);

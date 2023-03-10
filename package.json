@@ -13,6 +13,7 @@
     "@tanem/react-nprogress": "^5.0.14",
     "@urql/exchange-multipart-fetch": "^0.1.14",
     "axios": "^0.27.2",
+    "chance": "^1.1.11",
     "graphql": "^16.5.0",
     "graphql-ws": "^5.11.2",
     "moment": "^2.29.4",

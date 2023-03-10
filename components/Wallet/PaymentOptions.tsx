@@ -12,7 +12,7 @@ import Info from "../shared/Info";
 const PaymentOptions = () => {
 
   const minimum = 5;
-  const maximum = 200;
+  const maximum = 300;
 
   const [amountSelected, setAmountSelected] = useState(minimum);
   const [optionSelected, setOptionSelected] = useState(options[0]);
