@@ -2,7 +2,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useRef, useState } from "react";
 import { RiGamepadLine } from "react-icons/ri";
 import PaypalSDK from "../CheckoutProcessors/PaypalSDK";
-import Loading from "../shared/Loading";
+
 
 interface Props {
   amount: number;
@@ -14,7 +14,7 @@ const CheckoutModal = ({ show, amount, close }: Props) => {
   const closeButtonRef = useRef(null);
   const [loading, setLoading] = useState(true);
 
-  setTimeout(() => setLoading(false), 3000);
+  setTimeout(() => setLoading(false), 2000);
   return (
     <Transition.Root show={show} as={Fragment}>
       <Dialog

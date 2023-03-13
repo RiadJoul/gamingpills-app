@@ -33,7 +33,7 @@ const Disputes = () => {
                 Disputes
               </h1>
               <ChallengeList
-                challenges={data.playerDisputedChallenges}
+                challenges={data?.playerDisputedChallenges}
                 noDataTitle={"You do not have any dispute, That's good!"}
                 noDataDescription={"Instructions: If you have a disputed match please take a picture of the screen providing the actual result of the match."}
                 fetching={fetching}
@@ -42,9 +42,9 @@ const Disputes = () => {
           </div>
           <FooterNavigation />
         </div>
-        <div className="hidden md:flex col-span-3 h-screen mt-5 pb-36">
+
           <Chat />
-        </div>
+     
 
       </main>
     </>

@@ -65,6 +65,13 @@ export type ChallengesStats = {
   pendingChallenges: Scalars['Float'];
 };
 
+export type Conversation = {
+  __typename?: 'Conversation';
+  id: Scalars['String'];
+  members: Array<User>;
+  public: Scalars['Boolean'];
+};
+
 export type FeedResponse = {
   __typename?: 'FeedResponse';
   challenges: Array<Challenge>;
@@ -120,6 +127,15 @@ export type MatchesResponse = {
   invites: Array<Challenge>;
 };
 
+export type Message = {
+  __typename?: 'Message';
+  content: Scalars['String'];
+  conversation: Conversation;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['Float'];
+  user: User;
+};
+
 /** Mode (OPEN or CHALLENGE) */
 export enum Mode {
   Challenge = 'CHALLENGE',
@@ -150,6 +166,7 @@ export type Mutation = {
   resolveChallenge: GeneralResponse;
   respondToResults: GeneralResponse;
   seedAdmin: GeneralResponse;
+  sendMessage: GeneralResponse;
   sendResetPasswordEmail: GeneralResponse;
   sendVerificationCode: GeneralResponse;
   unbanPlayer: GeneralResponse;
@@ -277,6 +294,12 @@ export type MutationRespondToResultsArgs = {
 };
 
 
+export type MutationSendMessageArgs = {
+  content: Scalars['String'];
+  id: Scalars['String'];
+};
+
+
 export type MutationSendResetPasswordEmailArgs = {
   email: Scalars['String'];
 };
@@ -365,6 +388,7 @@ export type Query = {
   playerDisputedChallenges?: Maybe<Array<Challenge>>;
   playerStats: UserStats;
   players: Players;
+  publicConversations: Conversation;
   results: Scores;
   searchPlayer: Array<User>;
   stats: Stats;
@@ -445,6 +469,7 @@ export enum Status {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  newMessage: Message;
   newNotification: Notification;
 };
 
@@ -780,6 +805,11 @@ export type WalletsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type WalletsQuery = { __typename?: 'Query', wallets: { __typename?: 'Wallets', users: Array<{ __typename?: 'User', id: string, username: string, Wallet?: { __typename?: 'Wallet', balance: number } | null }>, transactions: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number }>, pendingWithdraws: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number, user: { __typename?: 'User', username: string, paypal?: string | null } }> } };
+
+export type NewMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NewMessageSubscription = { __typename?: 'Subscription', newMessage: { __typename?: 'Message', id: number, content: string, user: { __typename?: 'User', username: string } } };
 
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -1575,6 +1605,21 @@ export const WalletsDocument = gql`
 
 export function useWalletsQuery(options?: Omit<Urql.UseQueryArgs<WalletsQueryVariables>, 'query'>) {
   return Urql.useQuery<WalletsQuery>({ query: WalletsDocument, ...options });
+};
+export const NewMessageDocument = gql`
+    subscription NewMessage {
+  newMessage {
+    id
+    user {
+      username
+    }
+    content
+  }
+}
+    `;
+
+export function useNewMessageSubscription<TData = NewMessageSubscription>(options: Omit<Urql.UseSubscriptionArgs<NewMessageSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<NewMessageSubscription, TData>) {
+  return Urql.useSubscription<NewMessageSubscription, TData, NewMessageSubscriptionVariables>({ query: NewMessageDocument, ...options }, handler);
 };
 export const NewNotificationDocument = gql`
     subscription NewNotification {

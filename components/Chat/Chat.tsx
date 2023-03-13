@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import useAuth from "../../services/useAuth";
+//TODO: uninstall this package when done
 import Chance from "chance";
+import { useNewMessageSubscription } from "../../generated/graphql";
 
 const Chat = () => {
   //@ts-ignore
@@ -9,11 +11,19 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<any>([]);
 
+  const [res] = useNewMessageSubscription();
+
+  useEffect(() => {
+    if(res.data) {
+      console.log(res.data)
+    }
+  },[res])
+
   const ref = useRef(null);
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      setMessages([...messages, message]);
+      setMessages([...messages,message]);
       ref.current.value = "";
       setMessage("");
     }
@@ -25,9 +35,9 @@ const Chat = () => {
             name:Chance().name(),
             text:Chance().sentence()
         }
-      setMessages((prevMessages) => [ message
-        ,
-        ...prevMessages,
+      setMessages((prevMessages) => [ 
+        
+        ...prevMessages,message
       ]);
     }, 5000);
     return () => clearInterval(interval);
