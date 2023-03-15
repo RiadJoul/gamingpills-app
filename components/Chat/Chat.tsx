@@ -3,7 +3,9 @@ import Message from "./Message";
 import useAuth from "../../services/useAuth";
 //TODO: uninstall this package when done
 import Chance from "chance";
-import { useNewMessageSubscription } from "../../generated/graphql";
+import { useNewPrivateMessageSubscription, useNewPublicMessageSubscription } from "../../generated/graphql";
+import { useRouter } from "next/router";
+
 
 const Chat = () => {
   //@ts-ignore
@@ -11,13 +13,16 @@ const Chat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<any>([]);
 
-  const [res] = useNewMessageSubscription();
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [res] = id ? useNewPrivateMessageSubscription() : useNewPublicMessageSubscription();
 
   useEffect(() => {
     if(res.data) {
       console.log(res.data)
     }
-  },[res])
+  },[res,id])
 
   const ref = useRef(null);
 

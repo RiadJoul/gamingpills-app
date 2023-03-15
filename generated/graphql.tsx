@@ -69,6 +69,7 @@ export type Conversation = {
   __typename?: 'Conversation';
   id: Scalars['String'];
   members: Array<User>;
+  messages?: Maybe<Array<Message>>;
   public: Scalars['Boolean'];
 };
 
@@ -130,9 +131,9 @@ export type MatchesResponse = {
 export type Message = {
   __typename?: 'Message';
   content: Scalars['String'];
-  conversation: Conversation;
-  createdAt: Scalars['DateTime'];
-  id: Scalars['Float'];
+  conversation?: Maybe<Conversation>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['String'];
   user: User;
 };
 
@@ -296,7 +297,7 @@ export type MutationRespondToResultsArgs = {
 
 export type MutationSendMessageArgs = {
   content: Scalars['String'];
-  id: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -469,8 +470,9 @@ export enum Status {
 
 export type Subscription = {
   __typename?: 'Subscription';
-  newMessage: Message;
   newNotification: Notification;
+  newPrivateMessage: Message;
+  newPublicMessage: Message;
 };
 
 export type Transaction = {
@@ -806,15 +808,20 @@ export type WalletsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type WalletsQuery = { __typename?: 'Query', wallets: { __typename?: 'Wallets', users: Array<{ __typename?: 'User', id: string, username: string, Wallet?: { __typename?: 'Wallet', balance: number } | null }>, transactions: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number }>, pendingWithdraws: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number, user: { __typename?: 'User', username: string, paypal?: string | null } }> } };
 
-export type NewMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NewMessageSubscription = { __typename?: 'Subscription', newMessage: { __typename?: 'Message', id: number, content: string, user: { __typename?: 'User', username: string } } };
-
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
 export type NewNotificationSubscription = { __typename?: 'Subscription', newNotification: { __typename?: 'Notification', title: string, message: string, createdAt: any } };
+
+export type NewPrivateMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NewPrivateMessageSubscription = { __typename?: 'Subscription', newPrivateMessage: { __typename?: 'Message', id: string, content: string, user: { __typename?: 'User', username: string } } };
+
+export type NewPublicMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NewPublicMessageSubscription = { __typename?: 'Subscription', newPublicMessage: { __typename?: 'Message', id: string, content: string, user: { __typename?: 'User', username: string } } };
 
 export const GeneralResponseFragmentDoc = gql`
     fragment GeneralResponse on GeneralResponse {
@@ -1606,21 +1613,6 @@ export const WalletsDocument = gql`
 export function useWalletsQuery(options?: Omit<Urql.UseQueryArgs<WalletsQueryVariables>, 'query'>) {
   return Urql.useQuery<WalletsQuery>({ query: WalletsDocument, ...options });
 };
-export const NewMessageDocument = gql`
-    subscription NewMessage {
-  newMessage {
-    id
-    user {
-      username
-    }
-    content
-  }
-}
-    `;
-
-export function useNewMessageSubscription<TData = NewMessageSubscription>(options: Omit<Urql.UseSubscriptionArgs<NewMessageSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<NewMessageSubscription, TData>) {
-  return Urql.useSubscription<NewMessageSubscription, TData, NewMessageSubscriptionVariables>({ query: NewMessageDocument, ...options }, handler);
-};
 export const NewNotificationDocument = gql`
     subscription NewNotification {
   newNotification {
@@ -1633,4 +1625,34 @@ export const NewNotificationDocument = gql`
 
 export function useNewNotificationSubscription<TData = NewNotificationSubscription>(options: Omit<Urql.UseSubscriptionArgs<NewNotificationSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<NewNotificationSubscription, TData>) {
   return Urql.useSubscription<NewNotificationSubscription, TData, NewNotificationSubscriptionVariables>({ query: NewNotificationDocument, ...options }, handler);
+};
+export const NewPrivateMessageDocument = gql`
+    subscription NewPrivateMessage {
+  newPrivateMessage {
+    id
+    user {
+      username
+    }
+    content
+  }
+}
+    `;
+
+export function useNewPrivateMessageSubscription<TData = NewPrivateMessageSubscription>(options: Omit<Urql.UseSubscriptionArgs<NewPrivateMessageSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<NewPrivateMessageSubscription, TData>) {
+  return Urql.useSubscription<NewPrivateMessageSubscription, TData, NewPrivateMessageSubscriptionVariables>({ query: NewPrivateMessageDocument, ...options }, handler);
+};
+export const NewPublicMessageDocument = gql`
+    subscription NewPublicMessage {
+  newPublicMessage {
+    id
+    user {
+      username
+    }
+    content
+  }
+}
+    `;
+
+export function useNewPublicMessageSubscription<TData = NewPublicMessageSubscription>(options: Omit<Urql.UseSubscriptionArgs<NewPublicMessageSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<NewPublicMessageSubscription, TData>) {
+  return Urql.useSubscription<NewPublicMessageSubscription, TData, NewPublicMessageSubscriptionVariables>({ query: NewPublicMessageDocument, ...options }, handler);
 };

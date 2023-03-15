@@ -1,5 +1,5 @@
-subscription NewMessage {
-  newMessage {
+subscription NewPublicMessage {
+  newPublicMessage {
     id
     user {
         username

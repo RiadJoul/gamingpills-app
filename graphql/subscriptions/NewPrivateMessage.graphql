@@ -1,0 +1,9 @@
+subscription NewPrivateMessage {
+  newPrivateMessage {
+    id
+    user {
+        username
+    }
+    content
+  }
+}
