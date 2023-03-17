@@ -1,0 +1,10 @@
+query PublicMessages{
+	publicMessages {
+		id
+    content
+    user {
+      username
+    }
+    createdAt
+  }
+}

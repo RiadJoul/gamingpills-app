@@ -28,6 +28,8 @@ const Matches = () => {
   //@ts-ignore
   const {user}:User = useAuth();
 
+
+
   return user && (
     <>
       <PageHead title="Matches" />
@@ -87,19 +89,19 @@ const Matches = () => {
                   </Tab>
                 </Tab.List>
                 {
-                  data && <>
+                  !fetching && <>
                     <Tab.Panels className="mt-2 mb-20">
                       <Tab.Panel className="space-y-2">
-                        <ChallengeList challenges={data.matches.activeChallenges} fetching={fetching} 
+                        <ChallengeList challenges={data && data.matches.activeChallenges} fetching={fetching} 
                         noDataTitle={"You have no active challenges"} 
                         noDataDescription={"You can create a challenge or find an opponent in the chat"}
                         />
                       </Tab.Panel>
                       <Tab.Panel className="space-y-2">
-                      <Invites invites={data.matches.invites} />
+                      <Invites invites={data && data.matches.invites} />
                       </Tab.Panel>
                       <Tab.Panel className="space-y-2">
-                      <ChallengeList challenges={data.matches.finishedChallenges} fetching={fetching} 
+                      <ChallengeList challenges={data && data.matches.finishedChallenges} fetching={fetching} 
                       noDataTitle={"no challenges has been found"} 
                       noDataDescription={"You can create a challenge or find an opponent in the chat"}
                       />

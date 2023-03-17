@@ -1,0 +1,10 @@
+query PrivateMessages($id:String!){
+	privateMessages(id:$id){
+		id
+    content
+    user {
+      username
+    }
+    createdAt
+  }
+}

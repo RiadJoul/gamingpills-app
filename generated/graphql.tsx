@@ -69,7 +69,7 @@ export type Conversation = {
   __typename?: 'Conversation';
   id: Scalars['String'];
   members: Array<User>;
-  messages?: Maybe<Array<Message>>;
+  messages: Array<Message>;
   public: Scalars['Boolean'];
 };
 
@@ -131,7 +131,7 @@ export type MatchesResponse = {
 export type Message = {
   __typename?: 'Message';
   content: Scalars['String'];
-  conversation?: Maybe<Conversation>;
+  conversation: Conversation;
   createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['String'];
   user: User;
@@ -389,7 +389,9 @@ export type Query = {
   playerDisputedChallenges?: Maybe<Array<Challenge>>;
   playerStats: UserStats;
   players: Players;
+  privateMessages: Array<Message>;
   publicConversations: Conversation;
+  publicMessages: Array<Message>;
   results: Scores;
   searchPlayer: Array<User>;
   stats: Stats;
@@ -411,6 +413,11 @@ export type QueryPlayerArgs = {
 
 
 export type QueryPlayerStatsArgs = {
+  id: Scalars['String'];
+};
+
+
+export type QueryPrivateMessagesArgs = {
   id: Scalars['String'];
 };
 
@@ -653,6 +660,14 @@ export type RespondToResultsMutationVariables = Exact<{
 
 export type RespondToResultsMutation = { __typename?: 'Mutation', respondToResults: { __typename?: 'GeneralResponse', success?: boolean | null, errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null } };
 
+export type SendMessageMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['String']>;
+  content: Scalars['String'];
+}>;
+
+
+export type SendMessageMutation = { __typename?: 'Mutation', sendMessage: { __typename?: 'GeneralResponse', success?: boolean | null, errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null } };
+
 export type SendResetPasswordEmailMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -789,6 +804,18 @@ export type PlayersQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PlayersQuery = { __typename?: 'Query', players: { __typename?: 'Players', activePlayers: Array<{ __typename?: 'User', id: string, avatar?: string | null, banned?: boolean | null, username: string, Wallet?: { __typename?: 'Wallet', id: number, balance: number } | null }>, bannedPlayers: Array<{ __typename?: 'User', id: string, avatar?: string | null, banned?: boolean | null, username: string, Wallet?: { __typename?: 'Wallet', id: number, balance: number } | null }> } };
 
+export type PrivateMessagesQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type PrivateMessagesQuery = { __typename?: 'Query', privateMessages: Array<{ __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } }> };
+
+export type PublicMessagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PublicMessagesQuery = { __typename?: 'Query', publicMessages: Array<{ __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } }> };
+
 export type ResultsQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -816,12 +843,12 @@ export type NewNotificationSubscription = { __typename?: 'Subscription', newNoti
 export type NewPrivateMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NewPrivateMessageSubscription = { __typename?: 'Subscription', newPrivateMessage: { __typename?: 'Message', id: string, content: string, user: { __typename?: 'User', username: string } } };
+export type NewPrivateMessageSubscription = { __typename?: 'Subscription', newPrivateMessage: { __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } } };
 
 export type NewPublicMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NewPublicMessageSubscription = { __typename?: 'Subscription', newPublicMessage: { __typename?: 'Message', id: string, content: string, user: { __typename?: 'User', username: string } } };
+export type NewPublicMessageSubscription = { __typename?: 'Subscription', newPublicMessage: { __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } } };
 
 export const GeneralResponseFragmentDoc = gql`
     fragment GeneralResponse on GeneralResponse {
@@ -1040,6 +1067,17 @@ export const RespondToResultsDocument = gql`
 
 export function useRespondToResultsMutation() {
   return Urql.useMutation<RespondToResultsMutation, RespondToResultsMutationVariables>(RespondToResultsDocument);
+};
+export const SendMessageDocument = gql`
+    mutation SendMessage($id: String, $content: String!) {
+  sendMessage(id: $id, content: $content) {
+    ...GeneralResponse
+  }
+}
+    ${GeneralResponseFragmentDoc}`;
+
+export function useSendMessageMutation() {
+  return Urql.useMutation<SendMessageMutation, SendMessageMutationVariables>(SendMessageDocument);
 };
 export const SendResetPasswordEmailDocument = gql`
     mutation SendResetPasswordEmail($email: String!) {
@@ -1554,6 +1592,38 @@ export const PlayersDocument = gql`
 export function usePlayersQuery(options?: Omit<Urql.UseQueryArgs<PlayersQueryVariables>, 'query'>) {
   return Urql.useQuery<PlayersQuery>({ query: PlayersDocument, ...options });
 };
+export const PrivateMessagesDocument = gql`
+    query PrivateMessages($id: String!) {
+  privateMessages(id: $id) {
+    id
+    content
+    user {
+      username
+    }
+    createdAt
+  }
+}
+    `;
+
+export function usePrivateMessagesQuery(options: Omit<Urql.UseQueryArgs<PrivateMessagesQueryVariables>, 'query'>) {
+  return Urql.useQuery<PrivateMessagesQuery>({ query: PrivateMessagesDocument, ...options });
+};
+export const PublicMessagesDocument = gql`
+    query PublicMessages {
+  publicMessages {
+    id
+    content
+    user {
+      username
+    }
+    createdAt
+  }
+}
+    `;
+
+export function usePublicMessagesQuery(options?: Omit<Urql.UseQueryArgs<PublicMessagesQueryVariables>, 'query'>) {
+  return Urql.useQuery<PublicMessagesQuery>({ query: PublicMessagesDocument, ...options });
+};
 export const ResultsDocument = gql`
     query Results($id: String!) {
   results(id: $id) {
@@ -1634,6 +1704,7 @@ export const NewPrivateMessageDocument = gql`
       username
     }
     content
+    createdAt
   }
 }
     `;
@@ -1649,6 +1720,7 @@ export const NewPublicMessageDocument = gql`
       username
     }
     content
+    createdAt
   }
 }
     `;

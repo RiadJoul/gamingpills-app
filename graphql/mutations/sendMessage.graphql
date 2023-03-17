@@ -1,0 +1,5 @@
+mutation SendMessage ($id:String,$content:String!) {
+    sendMessage(id:$id,content: $content) {
+        ...GeneralResponse
+    }
+}

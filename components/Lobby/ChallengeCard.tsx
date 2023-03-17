@@ -73,7 +73,7 @@ const ChallengeCard = ({ challenge, refetch }: Props) => {
   };
 
   useEffect(() => {
-    if (challenge.status == Status.Active) {
+    if (challenge.status == Status.Active || isAllowed) {
       const MINUTE_MS = 30000; // 30 seconds
       const interval = setInterval(() => {
         refetch();

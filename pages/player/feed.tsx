@@ -14,9 +14,6 @@ import Chat from "../../components/Chat/Chat";
 import { useIsAuth } from "../../services/useIsAuth";
 import MyChallenges from "../../components/Challenge/MyChallenges";
 import Loading from "../../components/shared/Loading";
-import { BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill } from "react-icons/bs";
-import Image from "next/image";
-
 
 
 const Feed = () => {
@@ -34,7 +31,8 @@ const Feed = () => {
   const [errorField, setErrorField] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [success, setSucess] = useState<boolean>(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+
   useEffect(() => {
     const interval = setInterval(() => reexecuteQuery(), 5000);
 

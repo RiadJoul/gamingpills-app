@@ -93,7 +93,7 @@ const Match = () => {
           </div>
         </div>
         
-          <Chat />
+          <Chat challengeId={id}/>
       
         <div className='fixed bottom-0 w-full md:hidden'>
           <button className='bottom-0 my-8 text-base flex mr-10 items-center float-right px-5 py-2 bg-primary text-white font-bold tracking-wide rounded-md focus:outline-none' onClick={() => setIsChatOpen(true
