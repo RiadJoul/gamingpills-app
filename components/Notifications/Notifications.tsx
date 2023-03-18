@@ -42,13 +42,11 @@ const Notifications = () => {
   useEffect(() => {
 
     if (res.data) {
+      console.log(res.data)
       if (res.data.newNotification.id != notifications[0].id)
         //@ts-ignore
         setNotifications([res.data.newNotification, ...notifications]);
-        console.log(res.data.newNotification)
     }
-
-    
 
 
   }, [res])

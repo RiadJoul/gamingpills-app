@@ -3,7 +3,8 @@ query PrivateMessages($id:String!){
 		id
     content
     user {
-      username
+        username
+        role
     }
     createdAt
   }

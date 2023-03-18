@@ -3,6 +3,7 @@ subscription NewPrivateMessage {
     id
     user {
         username
+        role
     }
     content
     createdAt

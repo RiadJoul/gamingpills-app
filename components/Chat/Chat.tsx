@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Message from "./Message";
 import useAuth from "../../services/useAuth";
-import { Message as MessageType, useNewPrivateMessageSubscription, useNewPublicMessageSubscription, usePrivateMessagesQuery, usePublicMessagesQuery, useSendMessageMutation } from "../../generated/graphql";
+import { Challenge, Message as MessageType, Status, useNewPrivateMessageSubscription, useNewPublicMessageSubscription, usePrivateMessagesQuery, usePublicMessagesQuery, useSendMessageMutation } from "../../generated/graphql";
 import { useRouter } from "next/router";
 import FeedbackModal from "../Modals/FeedbackModal";
 
 interface Props {
-  challengeId?: string
+  challenge: Challenge
 }
 
-const Chat = ({ challengeId }: Props) => {
+const Chat = ({ challenge }: Props) => {
   //@ts-ignore
   const { user }: User = useAuth();
   const [message, setMessage] = useState("");
@@ -76,11 +76,11 @@ const Chat = ({ challengeId }: Props) => {
   const SendMessage = async () => {
     ref.current.value = "";
     setMessage("");
-    if (isEmptyOrSpaces(message)) return null;
+    if (isEmptyOrSpaces(message) || message.length > 250) return null;
 
     if (id) {
       const response = await sendMessage({
-        id: challengeId,
+        id: challenge.id,
         content: message
       });
       if (response.data?.sendMessage.errors) {
@@ -119,7 +119,7 @@ const Chat = ({ challengeId }: Props) => {
       <div className="hidden md:flex col-span-3 h-screen mt-5 mr-10 pb-36">
         <div className="bg-dark flex flex-col justify-between py-4 w-11/12 mx-1 px-1 rounded-md text-sm">
           <div className="flex flex-col overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch" ref={ref}>
-            <h3 className="text-white text-center pb-1 text-base font-semibold">{challengeId ? "Private chat" : "Public chat"}</h3>
+            <h3 className="text-white text-center pb-1 text-base font-semibold">{challenge ? "Private chat" : "Public chat"}</h3>
             <div className="px-2">
               {messages.length > 0 && (
                 messages.map((message) => (
@@ -134,8 +134,9 @@ const Chat = ({ challengeId }: Props) => {
             { messages.length == 0 &&
               <p className=" text-gray-200 text-base text-left mx-2 mb-3">{id ? "You can chat with your opponent here!" : "Welcome to chat!"}</p>
             }
-          
-            <div className="flex items-center justify-between">
+
+            {
+              challenge && challenge.status == Status.Active && <div className="flex items-center justify-between">
               <input
                 ref={ref}
                 type="text"
@@ -156,7 +157,35 @@ const Chat = ({ challengeId }: Props) => {
               >
                 Send
               </button>
-            </div>
+            </div> 
+            }
+            {
+              !challenge && <div className="flex items-center justify-between">
+              <input
+                ref={ref}
+                type="text"
+                placeholder="Send a message"
+                className="block w-full py-2 pl-4 mx-1 bg-gray-800 focus:bg-chat-message border-2 border-dark focus:border-primary focus:bg-black duration-300 rounded-md outline-none text-white"
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+                onKeyDown={handleKeyDown}
+                required
+              />
+
+              <button
+                className="bg-primary p-2 mx-1 text-white rounded-md hover:bg-primary-focus font-semibold uppercase"
+                onClick={() => {
+                  SendMessage();
+                }}
+              >
+                Send
+              </button>
+            </div> 
+            }
+          
+            
+
           </div>
         </div>
       </div>

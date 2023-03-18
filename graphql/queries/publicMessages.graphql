@@ -4,6 +4,7 @@ query PublicMessages{
     content
     user {
       username
+      role
     }
     createdAt
   }

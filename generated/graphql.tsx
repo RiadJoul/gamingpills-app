@@ -836,12 +836,12 @@ export type PrivateMessagesQueryVariables = Exact<{
 }>;
 
 
-export type PrivateMessagesQuery = { __typename?: 'Query', privateMessages: Array<{ __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } }> };
+export type PrivateMessagesQuery = { __typename?: 'Query', privateMessages: Array<{ __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string, role?: Role | null } }> };
 
 export type PublicMessagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PublicMessagesQuery = { __typename?: 'Query', publicMessages: Array<{ __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } }> };
+export type PublicMessagesQuery = { __typename?: 'Query', publicMessages: Array<{ __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string, role?: Role | null } }> };
 
 export type ResultsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -870,12 +870,12 @@ export type NewNotificationSubscription = { __typename?: 'Subscription', newNoti
 export type NewPrivateMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NewPrivateMessageSubscription = { __typename?: 'Subscription', newPrivateMessage: { __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } } };
+export type NewPrivateMessageSubscription = { __typename?: 'Subscription', newPrivateMessage: { __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string, role?: Role | null } } };
 
 export type NewPublicMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NewPublicMessageSubscription = { __typename?: 'Subscription', newPublicMessage: { __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string } } };
+export type NewPublicMessageSubscription = { __typename?: 'Subscription', newPublicMessage: { __typename?: 'Message', id: string, content: string, createdAt?: any | null, user: { __typename?: 'User', username: string, role?: Role | null } } };
 
 export const GeneralResponseFragmentDoc = gql`
     fragment GeneralResponse on GeneralResponse {
@@ -1663,6 +1663,7 @@ export const PrivateMessagesDocument = gql`
     content
     user {
       username
+      role
     }
     createdAt
   }
@@ -1679,6 +1680,7 @@ export const PublicMessagesDocument = gql`
     content
     user {
       username
+      role
     }
     createdAt
   }
@@ -1767,6 +1769,7 @@ export const NewPrivateMessageDocument = gql`
     id
     user {
       username
+      role
     }
     content
     createdAt
@@ -1783,6 +1786,7 @@ export const NewPublicMessageDocument = gql`
     id
     user {
       username
+      role
     }
     content
     createdAt

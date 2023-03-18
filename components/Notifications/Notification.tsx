@@ -86,6 +86,9 @@ const Notification = ({ notification }: Props) => {
                         notification.title.includes("Invite") && <GiPill />
                     }
                     {
+                        notification.title.includes("Account") && <GiPill />
+                    }
+                    {
                         notification.title.includes("Funds") && <BsCashCoin />
                     }
                     {

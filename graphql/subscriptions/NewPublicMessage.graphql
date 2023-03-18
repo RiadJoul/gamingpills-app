@@ -3,6 +3,7 @@ subscription NewPublicMessage {
     id
     user {
         username
+        role
     }
     content
     createdAt
