@@ -27,7 +27,7 @@ interface Props {
 
 const ChallengeModal = (props: Props) => {
   const [result] = useGamesQuery();
-  const { data, fetching } = result;
+  const { data } = result;
 
   //@ts-ignore
   const { user }: User = useAuth();

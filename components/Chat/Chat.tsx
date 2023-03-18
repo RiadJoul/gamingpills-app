@@ -132,7 +132,7 @@ const Chat = ({ challengeId }: Props) => {
           
           <div className="pt-4 sm:mb-0">
             { messages.length == 0 &&
-              <p className=" text-gray-200 text-base text-left mx-2 mb-3">Welcome to chat!</p>
+              <p className=" text-gray-200 text-base text-left mx-2 mb-3">{id ? "You can chat with your opponent here!" : "Welcome to chat!"}</p>
             }
           
             <div className="flex items-center justify-between">

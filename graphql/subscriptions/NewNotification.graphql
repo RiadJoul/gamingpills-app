@@ -1,5 +1,6 @@
 subscription NewNotification {
   newNotification {
+    id
     title
     message
     createdAt

@@ -123,12 +123,9 @@ const ChallengeCard = ({ challenge, refetch }: Props) => {
               <FaXbox />
             )}
           </p>
-          <div className="flex">
-            <p className="text-white font-semibold text-sm md:text-base">
-              {challenge.bet}$
-            </p>
-            <BsCash className="text-green-600 text-xl lg:mt-0.5 ml-2" />
-          </div>
+          
+          <p className="bg-black px-2 py-1 rounded-md text-primary text-base lg:text-lg font-bold uppercase">${challenge.bet} bet</p>
+          
         </div>
         <div className="flex justify-evenly">
           <div className="flex flex-col items-center pt-5 pb-1">

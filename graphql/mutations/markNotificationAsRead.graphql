@@ -1,0 +1,5 @@
+mutation MarkNotificationAsRead($id:Float!) {
+    markNotificationAsRead(id:$id) {
+        ...GeneralResponse
+    }
+}

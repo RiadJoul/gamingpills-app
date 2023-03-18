@@ -34,6 +34,7 @@ const Challenge = ({ challenge }: { challenge: Challenge }) => {
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const [success, setSucess] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>();
+  
   const Join = async () => {
     setLoading(true);
     setSuccessMessage(null);

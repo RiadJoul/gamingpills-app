@@ -161,6 +161,8 @@ export type Mutation = {
   fundWallet: GeneralResponse;
   login: User;
   logout: Scalars['Boolean'];
+  markNotificationAsRead: GeneralResponse;
+  markNotificationsAsRead: GeneralResponse;
   register: SignUpResponse;
   rejectInvite: GeneralResponse;
   resetPassword: GeneralResponse;
@@ -261,6 +263,11 @@ export type MutationLoginArgs = {
 };
 
 
+export type MutationMarkNotificationAsReadArgs = {
+  id: Scalars['Float'];
+};
+
+
 export type MutationRegisterArgs = {
   birthDate: Scalars['DateTime'];
   email: Scalars['String'];
@@ -349,10 +356,12 @@ export type MutationWithdrawArgs = {
 
 export type Notification = {
   __typename?: 'Notification';
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['Float'];
+  isRead?: Maybe<Scalars['Boolean']>;
   message: Scalars['String'];
   title: Scalars['String'];
-  userId?: Maybe<Scalars['String']>;
+  user: User;
 };
 
 /** Platform of the challenge */
@@ -385,6 +394,7 @@ export type Query = {
   games?: Maybe<Array<Game>>;
   gamesModes?: Maybe<Array<GameMode>>;
   matches?: Maybe<MatchesResponse>;
+  notifications: Array<Notification>;
   player: User;
   playerDisputedChallenges?: Maybe<Array<Challenge>>;
   playerStats: UserStats;
@@ -628,6 +638,18 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
 
+export type MarkNotificationAsReadMutationVariables = Exact<{
+  id: Scalars['Float'];
+}>;
+
+
+export type MarkNotificationAsReadMutation = { __typename?: 'Mutation', markNotificationAsRead: { __typename?: 'GeneralResponse', success?: boolean | null, errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null } };
+
+export type MarkNotificationsAsReadMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MarkNotificationsAsReadMutation = { __typename?: 'Mutation', markNotificationsAsRead: { __typename?: 'GeneralResponse', success?: boolean | null, errors?: Array<{ __typename?: 'FieldError', field: string, message: string }> | null } };
+
 export type RejectInviteMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -792,6 +814,11 @@ export type ChallengesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ChallengesQuery = { __typename?: 'Query', challenges: { __typename?: 'ManageChallengesResponse', activeChallenges: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, bet: number, createdAt: any }>, disputedChallenges: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, bet: number, createdAt: any }>, finishedChallenges: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, bet: number, createdAt: any }> } };
 
+export type NotificationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: number, title: string, message: string, isRead?: boolean | null, createdAt?: any | null }> };
+
 export type PlayerQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -838,7 +865,7 @@ export type WalletsQuery = { __typename?: 'Query', wallets: { __typename?: 'Wall
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NewNotificationSubscription = { __typename?: 'Subscription', newNotification: { __typename?: 'Notification', title: string, message: string, createdAt: any } };
+export type NewNotificationSubscription = { __typename?: 'Subscription', newNotification: { __typename?: 'Notification', id: number, title: string, message: string, createdAt?: any | null } };
 
 export type NewPrivateMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -1019,6 +1046,28 @@ export const LogoutDocument = gql`
 
 export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
+};
+export const MarkNotificationAsReadDocument = gql`
+    mutation MarkNotificationAsRead($id: Float!) {
+  markNotificationAsRead(id: $id) {
+    ...GeneralResponse
+  }
+}
+    ${GeneralResponseFragmentDoc}`;
+
+export function useMarkNotificationAsReadMutation() {
+  return Urql.useMutation<MarkNotificationAsReadMutation, MarkNotificationAsReadMutationVariables>(MarkNotificationAsReadDocument);
+};
+export const MarkNotificationsAsReadDocument = gql`
+    mutation MarkNotificationsAsRead {
+  markNotificationsAsRead {
+    ...GeneralResponse
+  }
+}
+    ${GeneralResponseFragmentDoc}`;
+
+export function useMarkNotificationsAsReadMutation() {
+  return Urql.useMutation<MarkNotificationsAsReadMutation, MarkNotificationsAsReadMutationVariables>(MarkNotificationsAsReadDocument);
 };
 export const RejectInviteDocument = gql`
     mutation RejectInvite($id: String!) {
@@ -1551,6 +1600,21 @@ export const ChallengesDocument = gql`
 export function useChallengesQuery(options?: Omit<Urql.UseQueryArgs<ChallengesQueryVariables>, 'query'>) {
   return Urql.useQuery<ChallengesQuery>({ query: ChallengesDocument, ...options });
 };
+export const NotificationsDocument = gql`
+    query Notifications {
+  notifications {
+    id
+    title
+    message
+    isRead
+    createdAt
+  }
+}
+    `;
+
+export function useNotificationsQuery(options?: Omit<Urql.UseQueryArgs<NotificationsQueryVariables>, 'query'>) {
+  return Urql.useQuery<NotificationsQuery>({ query: NotificationsDocument, ...options });
+};
 export const PlayerDocument = gql`
     query Player($id: String!) {
   player(id: $id) {
@@ -1686,6 +1750,7 @@ export function useWalletsQuery(options?: Omit<Urql.UseQueryArgs<WalletsQueryVar
 export const NewNotificationDocument = gql`
     subscription NewNotification {
   newNotification {
+    id
     title
     message
     createdAt

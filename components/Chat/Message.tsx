@@ -15,7 +15,7 @@ const Message = ({ text, user,createdAt}: Props) => {
     return (
         user &&
         <div
-            className="text-sm py-1 px-1 rounded hover:bg-gray-500/30 leading-6"
+            className="text-sm py-0.5 px-1 rounded hover:bg-gray-500/30 leading-6"
         >
             <div className="inline-flex items-baseline">
             <p className=" text-gray-400 mr-1 text-xs">{moment(createdAt).fromNow()}</p>
