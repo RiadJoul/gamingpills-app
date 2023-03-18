@@ -51,12 +51,16 @@ const Notification = ({ notification }: Props) => {
 
 
     const MarkNotificationAsRead = async (id: number) => {
-        const response = await markNotificationAsRead({ id: id });
-        if (response.data?.markNotificationAsRead.errors) {
-            setErrorField(response.data.markNotificationAsRead.errors[0].field);
-            setErrorMessage(response.data.markNotificationAsRead.errors[0].message);
-        } else {
+        if(notification.isRead) {
             router.push(getNavigation(notification.title))
+        } else {
+            const response = await markNotificationAsRead({ id: id });
+            if (response.data?.markNotificationAsRead.errors) {
+                setErrorField(response.data.markNotificationAsRead.errors[0].field);
+                setErrorMessage(response.data.markNotificationAsRead.errors[0].message);
+            } else {
+                router.push(getNavigation(notification.title))
+            }
         }
     }
 

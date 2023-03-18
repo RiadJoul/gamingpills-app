@@ -45,15 +45,20 @@ const Notifications = () => {
       if (res.data.newNotification.id != notifications[0].id)
         //@ts-ignore
         setNotifications([res.data.newNotification, ...notifications]);
+        console.log(res.data.newNotification)
     }
 
+    
+
+
+  }, [res])
+
+  useEffect(() => {
     if(data && data.notifications) {
       //@ts-ignore
       setNotifications(data.notifications)
     }
-
-
-  }, [res,data])
+  },[data])
 
   //check if there is unread notifications
   const hasUnreadNotifications = () => {
