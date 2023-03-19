@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import FeedbackModal from "../Modals/FeedbackModal";
 
 interface Props {
-  challenge: Challenge
+  challenge?: Challenge
 }
 
 const Chat = ({ challenge }: Props) => {

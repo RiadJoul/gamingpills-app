@@ -1,7 +1,5 @@
 import React from "react";
-//TODO: for now this is static but if we add another game other than fifa we need to
-//TODO: update this
-// get this from server based on the game
+
 const rules = [
     { id: 1, title: "Game Mode", rule: "5 minutes" },
     { id: 2, title: "Game Speed", rule: "Normal" },

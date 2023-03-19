@@ -35,9 +35,6 @@ const Feed = () => {
 
   useEffect(() => {
     const interval = setInterval(() => reexecuteQuery(), 5000);
-
-
-
     return () => {
       clearInterval(interval);
     };
@@ -110,7 +107,7 @@ const Feed = () => {
                   <Games games={data.feed.games} />
                   <MyChallenges challenges={data.feed.myChallenges} />
                   <Challenges games={data.feed.games} challenges={data.feed.challenges} />
-                 
+
 
                 </>
               }
@@ -118,11 +115,11 @@ const Feed = () => {
           </div>
           <FooterNavigation />
         </div>
-        
-          <Chat />
-        
+
+        <Chat />
+
       </main>
-      
+
     </>
   );
 };

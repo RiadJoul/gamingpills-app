@@ -38,7 +38,7 @@ const OnlineUser = ({ user }: Props) => {
             )}
           </div>
         </div>
-        <span className="font-semibold text-xs lg:text-sm text-white">
+        <span className="font-semibold text-xs text-white">
           {user.username}
         </span>
       </li>

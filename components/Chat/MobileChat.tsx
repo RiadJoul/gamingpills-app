@@ -10,8 +10,6 @@ interface Props {
 }
 
 const MobileChat = ({ isOpen, close }: Props) => {
-  //TODO: handle null value in message
-  //TODO: hanlde spam
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   //@ts-ignore
