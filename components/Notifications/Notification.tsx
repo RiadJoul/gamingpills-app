@@ -40,7 +40,7 @@ const Notification = ({ notification }: Props) => {
             case "Challenge Disputed":
                 return "/player/disputes"
                 break;
-            case "Score uploaded":
+            case "Score Uploaded":
                 return "/player/matches"
                 break;
             default:
@@ -50,7 +50,7 @@ const Notification = ({ notification }: Props) => {
     }
 
 
-    const MarkNotificationAsRead = async (id: number) => {
+    const MarkNotificationAsRead = async (id: string) => {
         if(notification.isRead) {
             router.push(getNavigation(notification.title))
         } else {

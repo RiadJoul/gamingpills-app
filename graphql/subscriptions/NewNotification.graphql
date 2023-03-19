@@ -3,6 +3,7 @@ subscription NewNotification {
     id
     title
     message
+    isRead
     createdAt
   }
 }

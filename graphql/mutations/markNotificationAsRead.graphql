@@ -1,4 +1,4 @@
-mutation MarkNotificationAsRead($id:Float!) {
+mutation MarkNotificationAsRead($id:String!) {
     markNotificationAsRead(id:$id) {
         ...GeneralResponse
     }

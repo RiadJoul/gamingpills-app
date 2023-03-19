@@ -264,7 +264,7 @@ export type MutationLoginArgs = {
 
 
 export type MutationMarkNotificationAsReadArgs = {
-  id: Scalars['Float'];
+  id: Scalars['String'];
 };
 
 
@@ -357,7 +357,7 @@ export type MutationWithdrawArgs = {
 export type Notification = {
   __typename?: 'Notification';
   createdAt?: Maybe<Scalars['DateTime']>;
-  id: Scalars['Float'];
+  id: Scalars['String'];
   isRead?: Maybe<Scalars['Boolean']>;
   message: Scalars['String'];
   title: Scalars['String'];
@@ -639,7 +639,7 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
 
 export type MarkNotificationAsReadMutationVariables = Exact<{
-  id: Scalars['Float'];
+  id: Scalars['String'];
 }>;
 
 
@@ -817,7 +817,7 @@ export type ChallengesQuery = { __typename?: 'Query', challenges: { __typename?:
 export type NotificationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: number, title: string, message: string, isRead?: boolean | null, createdAt?: any | null }> };
+export type NotificationsQuery = { __typename?: 'Query', notifications: Array<{ __typename?: 'Notification', id: string, title: string, message: string, isRead?: boolean | null, createdAt?: any | null }> };
 
 export type PlayerQueryVariables = Exact<{
   id: Scalars['String'];
@@ -865,7 +865,7 @@ export type WalletsQuery = { __typename?: 'Query', wallets: { __typename?: 'Wall
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NewNotificationSubscription = { __typename?: 'Subscription', newNotification: { __typename?: 'Notification', id: number, title: string, message: string, createdAt?: any | null } };
+export type NewNotificationSubscription = { __typename?: 'Subscription', newNotification: { __typename?: 'Notification', id: string, title: string, message: string, isRead?: boolean | null, createdAt?: any | null } };
 
 export type NewPrivateMessageSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -1048,7 +1048,7 @@ export function useLogoutMutation() {
   return Urql.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument);
 };
 export const MarkNotificationAsReadDocument = gql`
-    mutation MarkNotificationAsRead($id: Float!) {
+    mutation MarkNotificationAsRead($id: String!) {
   markNotificationAsRead(id: $id) {
     ...GeneralResponse
   }
@@ -1755,6 +1755,7 @@ export const NewNotificationDocument = gql`
     id
     title
     message
+    isRead
     createdAt
   }
 }

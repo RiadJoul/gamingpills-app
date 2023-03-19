@@ -28,10 +28,7 @@ const SignUp = () => {
   const [, register] = useRegisterMutation();
 
   const RegisterUser = async () => {
-    //TODO:client-side validation
-    
-    //TODO: ISSUE password does not work if he has symbols in it 
-    //this is an issue in the backend with the regex
+  
     if (birthDate == null) {
       setErrorField('Birth date');
       setErrorMessage('not a valid birth date');

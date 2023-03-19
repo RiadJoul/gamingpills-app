@@ -26,8 +26,10 @@ const Invite = ({ challenge }: Props) => {
     const [errorField, setErrorField] = useState<string>(null);
     const [errorMessage, setErrorMessage] = useState<string>(null);
     const [success, setSucess] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const Join = async () => {
+        setLoading(true);
         setErrorField(null);
         setErrorMessage(null);
         const response = await JoinChallenge({ id: challenge.id });
@@ -38,9 +40,11 @@ const Invite = ({ challenge }: Props) => {
             setSucess(true);
             setTimeout(() => router.push("/game/lobby/" + challenge.id), 1000);
         }
+        setLoading(false);
     };
 
     const Reject = async () => {
+        setLoading(true);
         setErrorField(null);
         setErrorMessage(null);
         const response = await RejectInvite({ id: challenge.id });
@@ -51,6 +55,7 @@ const Invite = ({ challenge }: Props) => {
             setSucess(true);
             setTimeout(() => router.push("/player/matches"), 1000);
         }
+        setLoading(false);
     }
 
     let createdAt = new Date(challenge.createdAt);
@@ -88,6 +93,7 @@ const Invite = ({ challenge }: Props) => {
                 cancelText={"Cancel"}
                 show={showJoinConfirmation}
                 close={() => setShowJoinConfirmation(false)}
+                loading={loading}
             />
 
             <FeedbackModal
@@ -101,6 +107,7 @@ const Invite = ({ challenge }: Props) => {
                 cancelText={"No"}
                 show={showRejectConfirmation}
                 close={() => setShowRejectConfirmation(false)}
+                loading={loading}
             />
 
             <SupportModal show={showSupport} close={() => setShowSupport(false)} />
