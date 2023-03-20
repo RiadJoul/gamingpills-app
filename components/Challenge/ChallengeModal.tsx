@@ -58,7 +58,7 @@ const ChallengeModal = (props: Props) => {
 
 
   useEffect(() => {
-    if (data) {
+    if (data && data.games) {
       setGameSelected(data.games[0])
       if (gameSelected)
         setSubModeSelected(gameSelected.gameModes[0])

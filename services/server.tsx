@@ -17,7 +17,7 @@ export const modes = [
   { id: 2, name: Mode.Challenge, icon: <BiCool /> },
 ];
 
-export const bets = [5, 10, 20, 30, 50, 100, 200,300];
+export const bets = [5, 10, 20, 30, 50, 100, 200,300,500];
 
 
 export const platforms = [

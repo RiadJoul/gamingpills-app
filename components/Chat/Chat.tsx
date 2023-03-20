@@ -76,7 +76,13 @@ const Chat = ({ challenge }: Props) => {
   const SendMessage = async () => {
     ref.current.value = "";
     setMessage("");
-    if (isEmptyOrSpaces(message) || message.length > 250) return null;
+    if (isEmptyOrSpaces(message)) return null;
+
+    if(message.length > 250) {
+      setErrorField("Message to long");
+      setErrorMessage("Your message is too long");
+      return
+    }
 
     if (id) {
       const response = await sendMessage({
@@ -102,8 +108,6 @@ const Chat = ({ challenge }: Props) => {
   function isEmptyOrSpaces(str) {
     return str === null || str.match(/^ *$/) !== null;
   }
-
-
 
 
   return (

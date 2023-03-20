@@ -201,13 +201,13 @@ const ChallengeCard = ({ challenge, refetch }: Props) => {
                 : "bg-green-200 text-green-800 ")
             }
           >
-            {challenge.platform}
+            #{challenge.platform}
           </span>
           <span className="bg-gray-800 text-gray-100 font-semibold uppercase px-2.5 py-0.5 rounded">
-            {challenge.game.name}
+            #{challenge.game.name}
           </span>
           <span className="bg-blue-100 text-blue-800 font-semibold uppercase px-2.5 py-0.5 rounded">
-            {challenge.gameMode.name}
+            #{challenge.gameMode.name}
           </span>
         </div>
         <div className="flex justify-center mt-5">
