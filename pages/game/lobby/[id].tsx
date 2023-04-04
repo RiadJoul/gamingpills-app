@@ -8,18 +8,18 @@ import { IoArrowBack } from "react-icons/io5";
 import ChallengeCard from "../../../components/Lobby/ChallengeCard";
 import { useChallengeQuery, useResultsQuery } from "../../../generated/graphql";
 import NoData from "../../../components/shared/NoData";
-import FifaRulesCard from "../../../components/Lobby/FifaRulesCard";
 import Loading from "../../../components/shared/Loading";
 import ResultsModal from "../../../components/Modals/ResultsModal";
 import Chat from "../../../components/Chat/Chat";
-import { useIsAuth } from "../../../services/useIsAuth";
 import useAuth from "../../../services/useAuth";
 import { User } from "../../../generated/graphql";
 import { BsChatLeftText } from "react-icons/bs";
 import MobileChat from "../../../components/Chat/MobileChat";
+import requireAuth from "../../../services/requireAuth";
+import RulesCard from "../../../components/Lobby/RulesCard";
+import { GamingpillsRules } from "../../../components/Lobby/GamingpillsRules";
 
 const Match = () => {
-  useIsAuth();
 
 
 
@@ -54,7 +54,7 @@ const Match = () => {
 
       <TopNavigation />
 
-      <MobileChat isOpen={isChatOpen} close={() => setIsChatOpen(false)} />
+      <MobileChat isOpen={isChatOpen} close={() => setIsChatOpen(false)} challenge={data && data.challenge}/>
       <main className="h-full bg-black grid grid-cols-12">
         <aside className="hidden md:flex flex-col mt-7 col-span-2 items-end text-white shadow mb-5">
           <SideNavigation />
@@ -81,7 +81,8 @@ const Match = () => {
                 <>
                   <ChallengeCard  challenge={data.challenge} refetch={checkIfResultsAreUploaded} />
                   <InfoCard challenge={data.challenge} />
-                  <FifaRulesCard />
+                  <RulesCard gameName={data.challenge.game.name}/>
+                  <GamingpillsRules/>
                 </>
               ) : (
                 <NoData
@@ -104,4 +105,4 @@ const Match = () => {
   );
 };
 
-export default Match;
+export default requireAuth(Match);

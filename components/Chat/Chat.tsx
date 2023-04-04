@@ -48,14 +48,15 @@ const Chat = ({ challenge }: Props) => {
   useEffect(() => {
 
     if (res.data) {
+      
       if (id) {
         //@ts-ignore
-        if (res.data.newPrivateMessage.id != messages[0]?.id)
+        if (res.data.newPrivateMessage.id != messages[ messages.length - 1]?.id)
           //@ts-ignore
           setMessages([...messages, res.data.newPrivateMessage]);
       } else {
         //@ts-ignore
-        if (res.data.newPublicMessage.id != messages[0]?.id)
+        if (res.data.newPublicMessage.id != messages[ messages.length - 1]?.id)
           //@ts-ignore
           setMessages([...messages, res.data.newPublicMessage]);
       }
@@ -138,7 +139,9 @@ const Chat = ({ challenge }: Props) => {
             { messages.length == 0 &&
               <p className=" text-gray-200 text-base text-left mx-2 mb-3">{id ? "You can chat with your opponent here!" : "Welcome to chat!"}</p>
             }
-
+{
+            challenge &&  challenge.status == Status.Finished && <p className=" text-gray-300 text-base text-left mx-2 mb-3">Chat closed</p>
+            }
             {
               challenge && challenge.status == Status.Active && <div className="flex items-center justify-between">
               <input

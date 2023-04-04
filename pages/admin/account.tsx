@@ -6,7 +6,6 @@ import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import Input from "../../components/shared/Input";
 import PageHead from "../../components/shared/PageHead";
-import { useIsAuth } from "../../services/useIsAuth";
 import useAuth from "../../services/useAuth";
 import { User } from "../../generated/graphql";
 
@@ -16,7 +15,6 @@ function classNames(...classes: string[]) {
 }
 
 const Account = () => {
-    useIsAuth();
     const router = useRouter();
     const { index } = router.query;
 

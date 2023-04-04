@@ -1,10 +1,10 @@
-import { Provider, createClient, dedupExchange, cacheExchange, subscriptionExchange} from "urql";
+import { Provider, createClient, cacheExchange, subscriptionExchange, dedupExchange} from "urql";
 import { Client, createClient as createWSClient } from 'graphql-ws';
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch';
 import { AuthProvider } from "../services/useAuth";
 import "../styles/globals.css";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Progress } from "../components/shared/ProgressBar/Progress";
 import { useProgressStore } from "../components/shared/ProgressBar/useProgressStore";
 
@@ -41,18 +41,16 @@ function MyApp({ Component, pageProps }) {
     exchanges: [
       dedupExchange,
       cacheExchange, 
+      //@ts-ignore
       multipartFetchExchange,
-      ...(wsClient
-        ? [
-            subscriptionExchange({
-              forwardSubscription: (operation) => ({
-                subscribe: (sink) => ({
-                  unsubscribe: wsClient.subscribe(operation, sink),
-                }),
-              }),
-            }),
-          ]
-        : []),
+      subscriptionExchange({
+        forwardSubscription: (operation) => ({
+          subscribe: (sink) => ({
+            unsubscribe: wsClient.subscribe(operation, sink),
+          }),
+        }),
+      }),
+      
     ],
   });
 
@@ -80,6 +78,22 @@ function MyApp({ Component, pageProps }) {
     }
   },[router])
   
+  const [isDown] = useState<boolean>(false);
+
+
+  if(isDown) return (
+    <section className="flex font-primary items-center h-screen p-16 bg-dark text-gray-100">
+            <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
+                <div className="max-w-md text-center">
+                    <h2 className="mb-8 font-extrabold text-9xl text-primary-focus">
+                        <span className="sr-only">Error</span>503
+                    </h2>
+                    <p className="text-2xl font-semibold md:text-4xl">Gamingpills is not available at this time</p>
+                    <p className="mt-4 mb-8 text-lg text-gray-400">Sorry, we're down for maintenance. Check back shortly</p>
+                </div>
+            </div>
+    </section>
+  )
 
   return (
     <Provider value={client}>

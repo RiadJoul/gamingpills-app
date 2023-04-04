@@ -14,14 +14,14 @@ import {
 import FeedbackModal from "../../components/Modals/FeedbackModal";
 import ImageEditor from "../../components/Account/ImageEditor";
 import Chat from "../../components/Chat/Chat";
-import { useIsAuth } from "../../services/useIsAuth";
 import useAuth from "../../services/useAuth";
+import requireAuth from "../../services/requireAuth";
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Account = () => {
-  useIsAuth();
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -357,4 +357,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default requireAuth(Account);

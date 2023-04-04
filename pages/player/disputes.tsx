@@ -4,12 +4,11 @@ import FooterNavigation from "../../components/Navigation/FooterNavigation";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import PageHead from "../../components/shared/PageHead";
-import { useIsAuth } from "../../services/useIsAuth";
+import requireAuth from "../../services/requireAuth";
 import useAuth from "../../services/useAuth";
 import { usePlayerDisputedChallengesQuery, User } from "../../generated/graphql";
 import ChallengeList from "../../components/Challenge/ChallengeList";
 const Disputes = () => {
-  useIsAuth();
   //@ts-ignore
   const { user }: User = useAuth();
 
@@ -51,4 +50,4 @@ const Disputes = () => {
   );
 };
 
-export default Disputes;
+export default requireAuth(Disputes);

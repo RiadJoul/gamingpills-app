@@ -7,14 +7,12 @@ import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import PageHead from "../../components/shared/PageHead";
 import { Category } from "../../generated/graphql";
-import { useIsAuth } from "../../services/useIsAuth";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
 }
 
 const Games = () => {
-    useIsAuth();
     const router = useRouter();
     const { index } = router.query;
 

@@ -5,30 +5,51 @@ import TopNavigation from "../../components/Navigation/TopNavigation";
 import PageHead from "../../components/shared/PageHead";
 import { Tab } from "@headlessui/react";
 import Invites from "../../components/Invite/Invites";
-import { useMatchesQuery } from "../../generated/graphql";
+import { Challenge, useMatchesQuery } from "../../generated/graphql";
 import Chat from "../../components/Chat/Chat";
-import { useIsAuth } from "../../services/useIsAuth";
 import useAuth from "../../services/useAuth";
 import { useRouter } from "next/router";
 import ChallengeList from "../../components/Challenge/ChallengeList";
+import Button from "../../components/shared/Button";
+import requireAuth from "../../services/requireAuth";
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Matches = () => {
-  useIsAuth();
   const router = useRouter();
   const { index } = router.query;
 
   const [selectedIndex, setSelectedIndex] = useState(index ? index : 0);
 
-  const [result] = useMatchesQuery();
+  //graphql pagination values
+  const [skip, setSkip] = useState<number>(0);
+  const [take] = useState<number>(10);
+  const [finishedchallenges,setFinishedChallenges] = useState<Challenge[]>();
+
+  const [result,executeQuery] = useMatchesQuery(({requestPolicy:"cache-and-network",variables:{skip:skip,take:take}}));
   const { data ,fetching} = result;
 
   //@ts-ignore
   const {user}:User = useAuth();
 
+  useEffect(() => {
+      if(data && skip == 0) {
+        setFinishedChallenges(data.matches?.finishedChallenges.challenges)
+      }
+  },[data])
 
+  useEffect(() => {
+    setSkip(0)
+  },[])
+
+
+
+  const loadMore = () => {
+    executeQuery({variables:{ skip: skip + take, take: 10 },requestPolicy:"network-only"})
+    setFinishedChallenges([...finishedchallenges,...data.matches.finishedChallenges.challenges])
+    setSkip(skip + take);
+  };
 
   return user && (
     <>
@@ -54,7 +75,7 @@ const Matches = () => {
                   <Tab
                     className={({ selected }) =>
                       classNames(
-                        "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5 text-white",
+                        "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5",
                         selected
                           ? "bg-white shadow text-primary-focus font-semibold"
                           : "text-blue-100 hover:bg-black hover:text-white"
@@ -66,7 +87,7 @@ const Matches = () => {
                   <Tab
                     className={({ selected }) =>
                       classNames(
-                        "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5 text-white",
+                        "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5 ",
                         selected
                           ? "bg-white shadow text-primary-focus font-semibold"
                           : "text-blue-100 hover:bg-black hover:text-white"
@@ -78,7 +99,7 @@ const Matches = () => {
                   <Tab
                     className={({ selected }) =>
                       classNames(
-                        "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5 text-white",
+                        "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5",
                         selected
                           ? "bg-white shadow text-primary-focus font-semibold"
                           : "text-blue-100 hover:bg-black hover:text-white"
@@ -101,10 +122,22 @@ const Matches = () => {
                       <Invites invites={data && data.matches.invites} />
                       </Tab.Panel>
                       <Tab.Panel className="space-y-2">
-                      <ChallengeList challenges={data && data.matches.finishedChallenges} fetching={fetching} 
+                      <ChallengeList challenges={finishedchallenges} fetching={fetching} 
                       noDataTitle={"no challenges has been found"} 
                       noDataDescription={"You can create a challenge or find an opponent in the chat"}
                       />
+                      {
+                data.matches.finishedChallenges.hasMore && <div className="flex justify-end">
+                <Button 
+                  text="Load more" 
+                  textColor={"white"} 
+                  bgColor={"dark"} 
+                  size={"small"} 
+                  width={"xmin"} 
+                  onClick={() => loadMore()} 
+                />
+              </div> 
+              }
                       </Tab.Panel>
                     </Tab.Panels>
 
@@ -123,4 +156,4 @@ const Matches = () => {
   );
 };
 
-export default Matches;
+export default requireAuth(Matches);

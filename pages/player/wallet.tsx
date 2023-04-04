@@ -8,17 +8,17 @@ import PageHead from "../../components/shared/PageHead";
 import PaymentOptions from "../../components/Wallet/PaymentOptions";
 import Transactions from "../../components/Wallet/Transactions";
 import WalletBalance from "../../components/Wallet/WalletBalance";
-import { useIsAuth } from "../../services/useIsAuth";
+import requireAuth from "../../services/requireAuth";
 import useAuth from "../../services/useAuth";
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Wallet = () => {
-  useIsAuth();
   const [selectedIndex, setSelectedIndex] = useState(0);
   //@ts-ignore
   const {user}:User = useAuth();
+  
   return user && (
     <>
       <PageHead title="Wallet" />
@@ -84,4 +84,4 @@ const Wallet = () => {
   );
 };
 
-export default Wallet;
+export default requireAuth(Wallet);

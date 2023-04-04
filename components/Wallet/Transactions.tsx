@@ -1,13 +1,51 @@
-import React from "react";
-import { Status, Type, useTransactionsQuery } from "../../generated/graphql";
+import React, { useEffect, useState } from "react";
+import { Status, Transaction, Type, useTransactionsQuery } from "../../generated/graphql";
 import format from "../../services/dateFormatter";
+import Button from "../shared/Button";
 import Loading from "../shared/Loading";
 import NoData from "../shared/NoData";
 
 const Transactions = () => {
-  const [result] = useTransactionsQuery();
+  const [skip, setSkip] = useState<number>(0);
+  const [take] = useState<number>(10);
 
+  const [transactions,setTransactions] = useState<Transaction[]>();
+
+  const [result, executeQuery] = useTransactionsQuery({requestPolicy:"cache-and-network",variables:{skip:skip,take:take}});
   const { data, fetching } = result;
+
+  useEffect(() => {
+    setSkip(0)
+  },[])
+
+  useEffect(() => {
+    if(data && skip == 0) {
+      setTransactions(data.transactions.transactions)
+    }
+},[data])
+
+
+
+
+const loadMore = () => {
+  executeQuery({
+    variables: { skip: skip + take, take: 10 },
+    requestPolicy: "network-only",
+  });
+  setSkip(skip + take);
+};
+
+useEffect(() => {
+  if (data && skip > 0) {
+    const newTransactions = data.transactions.transactions;
+    if (newTransactions.every((t) => transactions.includes(t))) {
+      
+      return;
+    }
+    setTransactions([...transactions, ...newTransactions]);
+  }
+}, [data, transactions]);
+  
   return (
     <>
       <h1 className="text-base mb-2 md:text-lg text-white font-semibold uppercase">
@@ -18,7 +56,8 @@ const Transactions = () => {
         <Loading />
       ) : (
         [
-          data.transactions.length > 0 ? (
+          transactions && transactions.length > 0 ? (
+            <>
             <div className="bg-dark p-4 lg:p-8 rounded-xl w-full">
               <div className="flex justify-center">
                 <div className="inline-block min-w-full shadow rounded-md overflow-hidden overflow-x-auto">
@@ -40,7 +79,7 @@ const Transactions = () => {
                       </tr>
                     </thead>
                     <tbody className="text-white capitalize">
-                      {data.transactions.map((transaction) => (
+                      {transactions.map((transaction) => (
                         <tr key={transaction.id}>
                           <td className="px-2 py-2 border-b bg-black border-black text-sm">
                             {
@@ -96,6 +135,19 @@ const Transactions = () => {
                 </div>
               </div>
             </div>
+            {
+                data.transactions.hasMore && <div className="flex justify-end">
+                <Button 
+                  text="Load more" 
+                  textColor={"white"} 
+                  bgColor={"dark"} 
+                  size={"small"} 
+                  width={"xmin"} 
+                  onClick={() => loadMore()} 
+                />
+              </div> 
+              }
+            </>
           ) : (
             <NoData
               title={"No Transaction yet"}

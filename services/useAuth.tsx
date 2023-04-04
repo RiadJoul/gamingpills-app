@@ -11,8 +11,9 @@ export const AuthProvider = ({ children }) => {
   const { data } = result;
 
   useEffect(() => {
-    if (data) setUser(data.AuthenticatedUser);
-
+    if (data) {
+      setUser(data.AuthenticatedUser);
+    }
   }, [result]);
 
 

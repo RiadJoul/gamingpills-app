@@ -6,25 +6,32 @@ import TopNavigation from "../../components/Navigation/TopNavigation";
 import OnlinePlayers from "../../components/OnlinePlayers/OnlineUsers";
 import PageHead from "../../components/shared/PageHead";
 import Challenges from "../../components/Challenge/Challenges";
-import { useFeedQuery, User, useSendVerificationCodeMutation } from "../../generated/graphql";
+import { Challenge, useFeedQuery, User, useSendVerificationCodeMutation } from "../../generated/graphql";
 import useAuth from "../../services/useAuth";
 import Alert from "../../components/shared/Alert";
 import FeedbackModal from "../../components/Modals/FeedbackModal";
 import Chat from "../../components/Chat/Chat";
-import { useIsAuth } from "../../services/useIsAuth";
+
 import MyChallenges from "../../components/Challenge/MyChallenges";
 import Loading from "../../components/shared/Loading";
+import requireAuth from "../../services/requireAuth";
+
+
 
 
 const Feed = () => {
-  useIsAuth();
+  //graphql pagination
+  const [skip, setSkip] = useState<number>(0);
+  const [take] = useState<number>(10);
+  const [challenges,setChallenges] = useState<Challenge[]>();
 
   //graphql
-  const [result, reexecuteQuery] = useFeedQuery();
+  const [result, executeQuery] = useFeedQuery({requestPolicy:"cache-and-network",variables:{skip:skip,take:take}});
   const [, sendVerification] = useSendVerificationCodeMutation();
   //@ts-ignore
   const { user }: User = useAuth();
   const { data, fetching } = result;
+
 
   //responses
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,9 +39,13 @@ const Feed = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [success, setSucess] = useState<boolean>(false);
 
-
   useEffect(() => {
-    const interval = setInterval(() => reexecuteQuery(), 5000);
+    setSkip(0)
+  },[])
+
+  
+  useEffect(() => {
+    const interval = setInterval(() => executeQuery(), 30000);
     return () => {
       clearInterval(interval);
     };
@@ -52,6 +63,19 @@ const Feed = () => {
       setSucess(true);
     }
     setLoading(false);
+  };
+
+  useEffect(() => {
+      if(data && skip == 0) {
+        setChallenges(data.feed?.challenges.challenges)
+      }
+  },[data])
+
+
+  const loadMore = () => {
+    executeQuery({variables:{ skip: skip + take, take: 10 },requestPolicy:"network-only"})
+    setChallenges([...challenges,...data.feed.challenges.challenges])
+    setSkip(skip + take);
   };
 
   return user && (
@@ -82,7 +106,7 @@ const Feed = () => {
           <SideNavigation />
         </aside>
         <div className="col-span-12 md:col-span-6 mt-5">
-          <div className="flex flex-col justify-center mx-3 lg:mx-5 pb-16">
+          <div className="flex flex-col justify-center mx-3 lg:mx-5 pb-24">
             <div className="space-y-2">
               {
                 fetching && <Loading />
@@ -106,9 +130,12 @@ const Feed = () => {
                   <OnlinePlayers users={data.feed.onlineUsers} />
                   <Games games={data.feed.games} />
                   <MyChallenges challenges={data.feed.myChallenges} />
-                  <Challenges games={data.feed.games} challenges={data.feed.challenges} />
-
-
+                  <Challenges 
+                   games={data.feed.games}
+                   challenges={challenges}
+                   loadMore={loadMore}
+                   hasMore={data.feed.challenges.hasMore}
+                  />
                 </>
               }
             </div>
@@ -124,4 +151,4 @@ const Feed = () => {
   );
 };
 
-export default Feed;
+export default requireAuth(Feed);

@@ -13,7 +13,7 @@ const FooterNavigation = () => {
   const [isChatOpen,setIsChatOpen] = useState<boolean>(false);
   return (
     <>
-      <MobileChat isOpen={isChatOpen} close={() => setIsChatOpen(false)}/>
+      {isChatOpen && <MobileChat isOpen={isChatOpen} close={() => setIsChatOpen(false)}/>}
       <ChallengeModal show={showModal} close={() => setShowModal(false)} />
       <div className="w-full">
         <section className="md:hidden block fixed inset-x-0 bottom-0 z-10 bg-dark shadow">

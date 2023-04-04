@@ -75,7 +75,7 @@ export type Conversation = {
 
 export type FeedResponse = {
   __typename?: 'FeedResponse';
-  challenges: Array<Challenge>;
+  challenges: PaginatedChallenges;
   games: Array<Game>;
   myChallenges?: Maybe<Array<Challenge>>;
   onlineUsers: Array<User>;
@@ -124,7 +124,7 @@ export type ManageChallengesResponse = {
 export type MatchesResponse = {
   __typename?: 'MatchesResponse';
   activeChallenges: Array<Challenge>;
-  finishedChallenges: Array<Challenge>;
+  finishedChallenges: PaginatedChallenges;
   invites: Array<Challenge>;
 };
 
@@ -168,7 +168,6 @@ export type Mutation = {
   resetPassword: GeneralResponse;
   resolveChallenge: GeneralResponse;
   respondToResults: GeneralResponse;
-  seedAdmin: GeneralResponse;
   sendMessage: GeneralResponse;
   sendResetPasswordEmail: GeneralResponse;
   sendVerificationCode: GeneralResponse;
@@ -364,6 +363,18 @@ export type Notification = {
   user: User;
 };
 
+export type PaginatedChallenges = {
+  __typename?: 'PaginatedChallenges';
+  challenges: Array<Challenge>;
+  hasMore: Scalars['Boolean'];
+};
+
+export type PaginatedTransactions = {
+  __typename?: 'PaginatedTransactions';
+  hasMore: Scalars['Boolean'];
+  transactions: Array<Transaction>;
+};
+
 /** Platform of the challenge */
 export enum Platform {
   Ps4 = 'PS4',
@@ -405,7 +416,7 @@ export type Query = {
   results: Scores;
   searchPlayer: Array<User>;
   stats: Stats;
-  transactions: Array<Transaction>;
+  transactions: PaginatedTransactions;
   user?: Maybe<User>;
   users: Array<User>;
   wallets: Wallets;
@@ -414,6 +425,18 @@ export type Query = {
 
 export type QueryChallengeArgs = {
   id: Scalars['String'];
+};
+
+
+export type QueryFeedArgs = {
+  skip: Scalars['Float'];
+  take: Scalars['Float'];
+};
+
+
+export type QueryMatchesArgs = {
+  skip: Scalars['Float'];
+  take: Scalars['Float'];
 };
 
 
@@ -439,6 +462,12 @@ export type QueryResultsArgs = {
 
 export type QuerySearchPlayerArgs = {
   username: Scalars['String'];
+};
+
+
+export type QueryTransactionsArgs = {
+  skip: Scalars['Float'];
+  take: Scalars['Float'];
 };
 
 
@@ -495,13 +524,13 @@ export type Subscription = {
 export type Transaction = {
   __typename?: 'Transaction';
   amount: Scalars['Float'];
-  createdAt: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
   id: Scalars['Float'];
   status: Status;
   type: Type;
-  updatedAt: Scalars['DateTime'];
-  user: User;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user?: Maybe<User>;
 };
 
 export type User = {
@@ -770,20 +799,26 @@ export type PlayerDisputedChallengesQueryVariables = Exact<{ [key: string]: neve
 
 export type PlayerDisputedChallengesQuery = { __typename?: 'Query', playerDisputedChallenges?: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, mode: Mode, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }> | null };
 
-export type FeedQueryVariables = Exact<{ [key: string]: never; }>;
+export type FeedQueryVariables = Exact<{
+  skip: Scalars['Float'];
+  take: Scalars['Float'];
+}>;
 
 
-export type FeedQuery = { __typename?: 'Query', feed?: { __typename?: 'FeedResponse', onlineUsers: Array<{ __typename?: 'User', id: string, username: string, avatar?: string | null }>, games: Array<{ __typename?: 'Game', id: number, name: string, category?: Category | null, cover?: string | null }>, challenges: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, mode: Mode, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }>, myChallenges?: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, mode: Mode, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }> | null } | null };
+export type FeedQuery = { __typename?: 'Query', feed?: { __typename?: 'FeedResponse', onlineUsers: Array<{ __typename?: 'User', id: string, username: string, avatar?: string | null }>, games: Array<{ __typename?: 'Game', id: number, name: string, category?: Category | null, cover?: string | null }>, myChallenges?: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, mode: Mode, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }> | null, challenges: { __typename?: 'PaginatedChallenges', hasMore: boolean, challenges: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, mode: Mode, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }> } } | null };
 
 export type GamesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GamesQuery = { __typename?: 'Query', games?: Array<{ __typename?: 'Game', id: number, name: string, category?: Category | null, gameModes?: Array<{ __typename?: 'GameMode', id: number, name: string }> | null }> | null };
 
-export type MatchesQueryVariables = Exact<{ [key: string]: never; }>;
+export type MatchesQueryVariables = Exact<{
+  skip: Scalars['Float'];
+  take: Scalars['Float'];
+}>;
 
 
-export type MatchesQuery = { __typename?: 'Query', matches?: { __typename?: 'MatchesResponse', activeChallenges: Array<{ __typename?: 'Challenge', id: string, mode: Mode, status?: Status | null, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }>, invites: Array<{ __typename?: 'Challenge', id: string, mode: Mode, status?: Status | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }>, finishedChallenges: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, mode: Mode, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }> } | null };
+export type MatchesQuery = { __typename?: 'Query', matches?: { __typename?: 'MatchesResponse', activeChallenges: Array<{ __typename?: 'Challenge', id: string, mode: Mode, status?: Status | null, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }>, invites: Array<{ __typename?: 'Challenge', id: string, mode: Mode, status?: Status | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }>, finishedChallenges: { __typename?: 'PaginatedChallenges', hasMore: boolean, challenges: Array<{ __typename?: 'Challenge', id: string, status?: Status | null, mode: Mode, homeScore?: number | null, awayScore?: number | null, bet: number, platform: Platform, comment?: string | null, createdAt: any, updatedAt: any, homePlayer: { __typename?: 'User', id: string, username: string, avatar?: string | null }, awayPlayer?: { __typename?: 'User', id: string, username: string, avatar?: string | null } | null, game: { __typename?: 'Game', id: number, name: string }, gameMode: { __typename?: 'GameMode', id: number, name: string } }> } } | null };
 
 export type PlayerStatsQueryVariables = Exact<{
   id: Scalars['String'];
@@ -797,10 +832,13 @@ export type StatsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type StatsQuery = { __typename?: 'Query', stats: { __typename?: 'Stats', betsStats?: { __typename?: 'BetsStats', active: number, today: number, allTime: number } | null, challengesStats?: { __typename?: 'ChallengesStats', pendingChallenges: number, activeChallenges: number, disputedChallenges: number, finishedChallenges: number } | null, profitsStats?: { __typename?: 'ProfitsStats', today: number, thisMonth: number, allTime: number } | null, walletsStats?: { __typename?: 'WalletsStats', totalBalance: number, totalDeposit: number, pendingAmountWithdraws: number } | null } };
 
-export type TransactionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type TransactionsQueryVariables = Exact<{
+  skip: Scalars['Float'];
+  take: Scalars['Float'];
+}>;
 
 
-export type TransactionsQuery = { __typename?: 'Query', transactions: Array<{ __typename?: 'Transaction', id: number, status: Status, type: Type, amount: number, description: string, createdAt: any }> };
+export type TransactionsQuery = { __typename?: 'Query', transactions: { __typename?: 'PaginatedTransactions', hasMore: boolean, transactions: Array<{ __typename?: 'Transaction', id: number, status: Status, type: Type, amount: number, description: string, createdAt?: any | null }> } };
 
 export type ChallengeQueryVariables = Exact<{
   id: Scalars['String'];
@@ -860,7 +898,7 @@ export type SearchPlayerQuery = { __typename?: 'Query', searchPlayer: Array<{ __
 export type WalletsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WalletsQuery = { __typename?: 'Query', wallets: { __typename?: 'Wallets', users: Array<{ __typename?: 'User', id: string, username: string, Wallet?: { __typename?: 'Wallet', balance: number } | null }>, transactions: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number }>, pendingWithdraws: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number, user: { __typename?: 'User', username: string, paypal?: string | null } }> } };
+export type WalletsQuery = { __typename?: 'Query', wallets: { __typename?: 'Wallets', users: Array<{ __typename?: 'User', id: string, username: string, Wallet?: { __typename?: 'Wallet', balance: number } | null }>, transactions: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number }>, pendingWithdraws: Array<{ __typename?: 'Transaction', id: number, status: Status, amount: number, user?: { __typename?: 'User', username: string, paypal?: string | null } | null }> } };
 
 export type NewNotificationSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -1306,8 +1344,8 @@ export function usePlayerDisputedChallengesQuery(options?: Omit<Urql.UseQueryArg
   return Urql.useQuery<PlayerDisputedChallengesQuery>({ query: PlayerDisputedChallengesDocument, ...options });
 };
 export const FeedDocument = gql`
-    query Feed {
-  feed {
+    query Feed($skip: Float!, $take: Float!) {
+  feed(skip: $skip, take: $take) {
     onlineUsers {
       id
       username
@@ -1318,36 +1356,6 @@ export const FeedDocument = gql`
       name
       category
       cover
-    }
-    challenges {
-      id
-      status
-      mode
-      homePlayer {
-        id
-        username
-        avatar
-      }
-      awayPlayer {
-        id
-        username
-        avatar
-      }
-      homeScore
-      awayScore
-      game {
-        id
-        name
-      }
-      gameMode {
-        id
-        name
-      }
-      bet
-      platform
-      comment
-      createdAt
-      updatedAt
     }
     myChallenges {
       id
@@ -1379,11 +1387,44 @@ export const FeedDocument = gql`
       createdAt
       updatedAt
     }
+    challenges {
+      challenges {
+        id
+        status
+        mode
+        homePlayer {
+          id
+          username
+          avatar
+        }
+        awayPlayer {
+          id
+          username
+          avatar
+        }
+        homeScore
+        awayScore
+        game {
+          id
+          name
+        }
+        gameMode {
+          id
+          name
+        }
+        bet
+        platform
+        comment
+        createdAt
+        updatedAt
+      }
+      hasMore
+    }
   }
 }
     `;
 
-export function useFeedQuery(options?: Omit<Urql.UseQueryArgs<FeedQueryVariables>, 'query'>) {
+export function useFeedQuery(options: Omit<Urql.UseQueryArgs<FeedQueryVariables>, 'query'>) {
   return Urql.useQuery<FeedQuery>({ query: FeedDocument, ...options });
 };
 export const GamesDocument = gql`
@@ -1404,8 +1445,8 @@ export function useGamesQuery(options?: Omit<Urql.UseQueryArgs<GamesQueryVariabl
   return Urql.useQuery<GamesQuery>({ query: GamesDocument, ...options });
 };
 export const MatchesDocument = gql`
-    query Matches {
-  matches {
+    query Matches($skip: Float!, $take: Float!) {
+  matches(skip: $skip, take: $take) {
     activeChallenges {
       id
       mode
@@ -1465,40 +1506,43 @@ export const MatchesDocument = gql`
       updatedAt
     }
     finishedChallenges {
-      id
-      status
-      mode
-      homePlayer {
+      challenges {
         id
-        username
-        avatar
+        status
+        mode
+        homePlayer {
+          id
+          username
+          avatar
+        }
+        awayPlayer {
+          id
+          username
+          avatar
+        }
+        homeScore
+        awayScore
+        game {
+          id
+          name
+        }
+        gameMode {
+          id
+          name
+        }
+        bet
+        platform
+        comment
+        createdAt
+        updatedAt
       }
-      awayPlayer {
-        id
-        username
-        avatar
-      }
-      homeScore
-      awayScore
-      game {
-        id
-        name
-      }
-      gameMode {
-        id
-        name
-      }
-      bet
-      platform
-      comment
-      createdAt
-      updatedAt
+      hasMore
     }
   }
 }
     `;
 
-export function useMatchesQuery(options?: Omit<Urql.UseQueryArgs<MatchesQueryVariables>, 'query'>) {
+export function useMatchesQuery(options: Omit<Urql.UseQueryArgs<MatchesQueryVariables>, 'query'>) {
   return Urql.useQuery<MatchesQuery>({ query: MatchesDocument, ...options });
 };
 export const PlayerStatsDocument = gql`
@@ -1546,19 +1590,22 @@ export function useStatsQuery(options?: Omit<Urql.UseQueryArgs<StatsQueryVariabl
   return Urql.useQuery<StatsQuery>({ query: StatsDocument, ...options });
 };
 export const TransactionsDocument = gql`
-    query Transactions {
-  transactions {
-    id
-    status
-    type
-    amount
-    description
-    createdAt
+    query Transactions($skip: Float!, $take: Float!) {
+  transactions(skip: $skip, take: $take) {
+    transactions {
+      id
+      status
+      type
+      amount
+      description
+      createdAt
+    }
+    hasMore
   }
 }
     `;
 
-export function useTransactionsQuery(options?: Omit<Urql.UseQueryArgs<TransactionsQueryVariables>, 'query'>) {
+export function useTransactionsQuery(options: Omit<Urql.UseQueryArgs<TransactionsQueryVariables>, 'query'>) {
   return Urql.useQuery<TransactionsQuery>({ query: TransactionsDocument, ...options });
 };
 export const ChallengeDocument = gql`

@@ -102,8 +102,6 @@ const SearchPlayerModal = ({ setAwayPlayer, show, close }: Props) => {
                             <div key={user.id} className="flex justify-between">
                               <div className="bg-dark rounded-md flex space-x-3">
                                 <div className="w-14 h-14 ">
-
-
                                   {user.avatar != null ? (
 
                                     <Image

@@ -7,13 +7,10 @@ import TopNavigation from "../../components/Navigation/TopNavigation";
 import Loading from "../../components/shared/Loading";
 import PageHead from "../../components/shared/PageHead";
 import { useStatsQuery } from "../../generated/graphql";
-import { useIsAuth } from "../../services/useIsAuth";
 
 
 
 const Dashboard = () => {
-  useIsAuth();
-
   //graphql
   const [result] = useStatsQuery();
 

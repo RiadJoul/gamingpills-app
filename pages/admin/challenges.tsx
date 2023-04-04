@@ -1,6 +1,6 @@
 import { Dialog, Tab, Transition } from "@headlessui/react";
 import moment from "moment";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import Chat from "../../components/Chat/Chat";
 import SideNavigation from "../../components/Navigation/SideNavigation";
@@ -9,7 +9,6 @@ import Loading from "../../components/shared/Loading";
 import NoData from "../../components/shared/NoData";
 import PageHead from "../../components/shared/PageHead";
 import { Challenge as ChallengeType, Status, useChallengeQuery, useChallengesQuery, useResolveChallengeMutation } from "../../generated/graphql";
-import { useIsAuth } from "../../services/useIsAuth";
 import Image from "next/image";
 import Input from "../../components/shared/Input";
 import Button from "../../components/shared/Button";
@@ -22,8 +21,6 @@ function classNames(...classes: string[]) {
 
 
 const Challenges = () => {
-    useIsAuth();
-
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     //graphql

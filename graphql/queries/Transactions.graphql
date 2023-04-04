@@ -1,10 +1,13 @@
-query Transactions {
+query Transactions($skip: Float!, $take: Float!) {
+  transactions(skip: $skip, take: $take) {
     transactions {
-        id
-        status
-        type
-        amount
-        description
-        createdAt
+      id
+      status
+      type
+      amount
+      description
+      createdAt
     }
+    hasMore
+  }
 }

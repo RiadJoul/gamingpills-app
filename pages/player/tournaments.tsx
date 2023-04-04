@@ -5,11 +5,10 @@ import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import NoData from "../../components/shared/NoData";
 import PageHead from "../../components/shared/PageHead";
-import { useIsAuth } from "../../services/useIsAuth";
+import requireAuth from "../../services/requireAuth";
 import useAuth from "../../services/useAuth";
 import { User } from "../../generated/graphql";
 const Tournaments = () => {
-  useIsAuth();
   //@ts-ignore
   const {user}:User = useAuth();
   return user && (
@@ -46,4 +45,4 @@ const Tournaments = () => {
   );
 };
 
-export default Tournaments;
+export default requireAuth(Tournaments);

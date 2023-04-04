@@ -1,92 +1,95 @@
-query Matches {
-    matches {
-        activeChallenges {
-            id
-            mode
-            status
-            homePlayer {
-                id
-                username
-                avatar
-            }
-            awayPlayer {
-                id
-                username
-                avatar
-            }
-            homeScore
-            awayScore
-            game {
+query Matches($skip:Float!,$take:Float!) {
+  matches(skip:$skip,take:$take) {
+    activeChallenges {
       id
-    name
-  }
-  gameMode {
-    id
-    name
-  }
-            bet
-            platform
-            comment
-            createdAt
-            updatedAt
-        }
-        invites {
-            id
-            mode
-            status
-            homePlayer {
-                id
-                username
-                avatar
-            }
-            awayPlayer {
-                id
-                username
-                avatar
-            }
-            game {
+      mode
+      status
+      homePlayer {
+        id
+        username
+        avatar
+      }
+      awayPlayer {
+        id
+        username
+        avatar
+      }
+      homeScore
+      awayScore
+      game {
+        id
+        name
+      }
+      gameMode {
+        id
+        name
+      }
+      bet
+      platform
+      comment
+      createdAt
+      updatedAt
+    }
+    invites {
       id
-    name
+      mode
+      status
+      homePlayer {
+        id
+        username
+        avatar
+      }
+      awayPlayer {
+        id
+        username
+        avatar
+      }
+      game {
+        id
+        name
+      }
+      gameMode {
+        id
+        name
+      }
+      bet
+      platform
+      comment
+      createdAt
+      updatedAt
+    }
+    finishedChallenges {
+      challenges {
+        id
+      status
+      mode
+      homePlayer {
+        id
+        username
+        avatar
+      }
+      awayPlayer {
+        id
+        username
+        avatar
+      }
+      homeScore
+      awayScore
+      game {
+        id
+        name
+      }
+      gameMode {
+        id
+        name
+      }
+      bet
+      platform
+      comment
+      createdAt
+      updatedAt
+      }
+      hasMore
+    }
   }
-  gameMode {
-    id
-    name
-  }
-            bet
-            platform
-            comment
-            createdAt
-            updatedAt
-        }
-        finishedChallenges {
-            id
-            status
-            mode
-            homePlayer {
-                id
-                username
-                avatar
-            }
-            awayPlayer {
-                id
-                username
-                avatar
-            }
-            homeScore
-            awayScore
-            game {
-      id
-    name
-  }
-  gameMode {
-    id
-    name
-  }
-            bet
-            platform
-            comment
-            createdAt
-            updatedAt
-        }
-	}
 }

@@ -6,7 +6,6 @@ import Chat from "../../components/Chat/Chat";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import PageHead from "../../components/shared/PageHead";
-import { useIsAuth } from "../../services/useIsAuth";
 import Image from "next/image";
 import { useBanPlayerMutation, usePlayerQuery, usePlayersQuery, User, useUnbanPlayerMutation } from "../../generated/graphql";
 import Loading from "../../components/shared/Loading";
@@ -24,7 +23,6 @@ function classNames(...classes: string[]) {
 
 const Players = () => {
     const ref = useRef(null);
-    useIsAuth();
     const router = useRouter();
     const { index } = router.query;
 

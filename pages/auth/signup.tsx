@@ -7,7 +7,6 @@ import GamingpillsPoster from "../../components/Public/GamingpillsPoster";
 import Success from "../../components/shared/Success";
 import Error from "../../components/shared/Error";
 import { useRegisterMutation } from "../../generated/graphql";
-import { useIsAuth } from "../../services/useIsAuth";
 
 const SignUp = () => {
 

@@ -1,5 +1,5 @@
-query Feed {
-    feed {
+query Feed($skip:Float!,$take:Float!) {
+    feed(skip:$skip,take:$take) {
         onlineUsers {
             id
             username
@@ -10,36 +10,6 @@ query Feed {
             name
             category
             cover
-        }
-        challenges {
-            id
-            status
-            mode
-            homePlayer {
-                id
-                username
-                avatar
-            }
-            awayPlayer {
-                id
-                username
-                avatar
-            }
-            homeScore
-            awayScore
-            game {
-                id
-                name
-            }
-            gameMode {
-                id
-                name
-            }
-            bet
-            platform
-            comment
-            createdAt
-            updatedAt
         }
         myChallenges {
             id
@@ -71,5 +41,39 @@ query Feed {
             createdAt
             updatedAt
         }
+        challenges {
+            challenges {
+                id
+                status
+                mode
+                homePlayer {
+                    id
+                    username
+                    avatar
+                }
+                awayPlayer {
+                    id
+                    username
+                    avatar
+                }
+                homeScore
+                awayScore
+                game {
+                    id
+                    name
+                }
+                gameMode {
+                    id
+                    name
+                }
+                bet
+                platform
+                comment
+                createdAt
+                updatedAt
+            }
+            hasMore
+        }
+        
 	}
 }

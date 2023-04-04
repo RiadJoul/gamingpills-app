@@ -24,6 +24,7 @@ const SideNavigation = () => {
     setLoading(true)
     const response = await logout();
       if (response.data?.logout) {
+        localStorage.removeItem("id")
         setTimeout(() => router.push("/auth/login"), 1000);
       }
   }
