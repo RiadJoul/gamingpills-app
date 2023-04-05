@@ -88,7 +88,7 @@ const ResultsModal = ({ show, challenge, results }: Props) => {
                             <span className="text-2xl font-bold mx-8">
                               {results.homeScore} : {results.awayScore}{" "}
                             </span>
-                            {challenge.awayPlayer.username}
+                            {challenge.awayPlayer?.username}
                           </h3>
                         </p>
                       </div>

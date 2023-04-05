@@ -6,7 +6,7 @@ import Platforms from "../components/Public/Platforms";
 import Features from "../components/Public/Features";
 import Games from "../components/Public/Games";
 
-const index = () => {
+export const index = () => {
     return (
         <>
             <PageHead title="Win money playing video games" />

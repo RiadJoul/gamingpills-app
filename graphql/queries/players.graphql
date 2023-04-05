@@ -20,5 +20,9 @@ query Players {
                 balance
             }
         }
+        onlinePlayersCount
+        totalBalances
+        todayTotalDeposits
+        bannedPlayersCount
   }
 }

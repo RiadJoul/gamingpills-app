@@ -3,20 +3,44 @@ query Challenges{
         activeChallenges {
             id
             status
+            homePlayer {
+                username
+            }
+            bet
+            createdAt
+        }
+        pendingChallenges {
+            id
+            status
+            homePlayer {
+                username
+            }
             bet
             createdAt
         }
         disputedChallenges {
             id
             status
+            homePlayer {
+                username
+            }
             bet
             createdAt
         }
 	    finishedChallenges {
             id
             status
+            homePlayer {
+                username
+            }
             bet
             createdAt
+        }
+        challengesStats {
+            activeChallenges,
+            pendingChallenges,
+            disputedChallenges,
+            finishedChallenges
         }
   }
 }

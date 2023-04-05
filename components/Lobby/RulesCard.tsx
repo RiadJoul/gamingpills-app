@@ -53,7 +53,6 @@ const NbaRules = [
     },
     {
         id: 5,
-        title: "",
         rule: "If you can't continue the match within 15 minutes of disconnecting, Gamingpills may rule on the match using our discretion. If you were losing, you will be given the loss. If you were winning, the match may be canceled or you may be given the loss depending on the circumstances. It is up to the player who was losing to reach out and attempt to play the match again. If you were losing and no attempt is made to play again within 15 minutes, you will lose the match.",
     },
     {
@@ -96,7 +95,7 @@ const FifaRulesCard = ({gameName}:Props) => {
                                             {rule.title}
                                         </span>
                                         <span className="text-white">
-                                            : {rule.rule}
+                                        {rule.title && ":"} {rule.rule}
                                         </span>
                                     </li>
                                 ))
@@ -111,7 +110,7 @@ const FifaRulesCard = ({gameName}:Props) => {
                                             {rule.title}
                                         </span>
                                         <span className="text-white">
-                                            : {rule.rule}
+                                        {rule.title && ":"} {rule.rule}
                                         </span>
                                     </li>
                                 ))

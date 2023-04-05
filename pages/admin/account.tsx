@@ -44,7 +44,7 @@ const Account = () => {
                                     <Tab
                                         className={({ selected }) =>
                                             classNames(
-                                                "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5 text-white",
+                                                "w-full rounded-lg py-2.5 text-sm lg:text-base font-medium leading-5",
                                                 selected
                                                     ? "bg-white shadow text-primary-focus font-semibold"
                                                     : "text-blue-100 hover:bg-black hover:text-white"

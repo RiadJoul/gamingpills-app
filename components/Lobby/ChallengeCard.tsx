@@ -187,7 +187,7 @@ const ChallengeCard = ({ challenge, refetch }: Props) => {
               )}
             </div>
             <h5 className="my-2 text-base lg:text-lg font-medium text-white">
-              {challenge.awayPlayer.username}
+              {challenge.awayPlayer?.username}
             </h5>
           </div>
         </div>

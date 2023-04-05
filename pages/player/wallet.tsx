@@ -18,7 +18,7 @@ const Wallet = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   //@ts-ignore
   const {user}:User = useAuth();
-  
+
   return user && (
     <>
       <PageHead title="Wallet" />
@@ -41,7 +41,7 @@ const Wallet = () => {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white",
+                      "w-full rounded-lg py-2.5 text-sm font-medium leading-5 ",
                       selected
                         ? "bg-white shadow text-primary-focus"
                         : "text-blue-100 hover:bg-black hover:text-white"
@@ -53,7 +53,7 @@ const Wallet = () => {
                 <Tab
                   className={({ selected }) =>
                     classNames(
-                      "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white",
+                      "w-full rounded-lg py-2.5 text-sm font-medium leading-5 ",
                       selected
                         ? "bg-white shadow text-primary-focus"
                         : "text-blue-100 hover:bg-black hover:text-white"

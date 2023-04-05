@@ -7,7 +7,7 @@ import PageHead from "../../components/shared/PageHead";
 import GamingpillsPoster from "../../components/Public/GamingpillsPoster";
 import Error from "../../components/shared/Error";
 
-import { useLoginMutation } from "../../generated/graphql";
+import { Role, useLoginMutation } from "../../generated/graphql";
 import Success from "../../components/shared/Success";
 
 
@@ -33,7 +33,11 @@ const Login = () => {
     if (response.data?.login.id) {
       localStorage.setItem("id",response.data.login.id)
       setSucess(true);
-      setTimeout(() => router.push("/player/feed"), 1000);
+      if(response.data.login.role == Role.Admin) {
+        setTimeout(() => router.push("/admin/dashboard"), 1000);
+      } else {
+        setTimeout(() => router.push("/player/feed"), 1000);
+      }
     } else {
       setErrorField("Error");
       setErrorMessage("username or password is incorrect");

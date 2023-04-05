@@ -183,7 +183,7 @@ const Invite = ({ challenge }: Props) => {
                             )}
                         </div>
                         <h5 className="text-sm lg:text-base font-medium text-white">
-                            {challenge.awayPlayer.username}
+                            {challenge.awayPlayer?.username}
                         </h5>
                     </div>
                 </div>

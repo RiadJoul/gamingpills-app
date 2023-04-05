@@ -7,12 +7,12 @@ interface Props {
   placeholder: string;
   onChange?: any;
   disabled?: boolean;
-  onKeyPress?: any
+  onKeyDown?: any
 }
 
-const Input = ({ label, type, value, placeholder, onChange, disabled ,onKeyPress}: Props) => {
+const Input = ({ label, type, value, placeholder, onChange, disabled ,onKeyDown}: Props) => {
   return (
-    <>
+    <div>
       {label && (
         <label className="block text-left ml-1 text-gray-100 text-sm lg:text-base font-bold">
           {label}
@@ -25,10 +25,10 @@ const Input = ({ label, type, value, placeholder, onChange, disabled ,onKeyPress
         value={value}
         onChange={onChange}
         disabled={disabled}
-        onKeyPress={onKeyPress}
+        onKeyDown={onKeyDown}
       />
   
-    </>
+    </div>
   );
 };
 
