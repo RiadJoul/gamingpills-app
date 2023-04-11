@@ -1,0 +1,5 @@
+mutation FundWallet($userId:String!,$amount:Float!) {
+    fundWallet(userId:$userId,amount:$amount) {
+        ...GeneralResponse
+    }
+}

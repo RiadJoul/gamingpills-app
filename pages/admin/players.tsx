@@ -1,18 +1,23 @@
+import moment from "moment";
 import { useState } from "react";
 import { CgPill } from "react-icons/cg";
-import { MdPendingActions, MdSportsScore } from "react-icons/md";
-import { RiSwordLine } from "react-icons/ri";
-import { ChallengeCard } from "../../components/Admin/ChallengeCard";
-import { ChallengeSearchModal } from "../../components/Admin/ChallengeSearchModal";
+import { FaBan, FaCashRegister } from "react-icons/fa";
+import {
+  MdAccountBalance,
+} from "react-icons/md";
+import { PlayerCard } from "../../components/Admin/PlayerCard";
+import { PlayerSearchModal } from "../../components/Admin/PlayerSearchModal";
 import StatCard from "../../components/Admin/StatCard";
 import Chat from "../../components/Chat/Chat";
+import FeedbackModal from "../../components/Modals/FeedbackModal";
 import SideNavigation from "../../components/Navigation/SideNavigation";
 import TopNavigation from "../../components/Navigation/TopNavigation";
 import Button from "../../components/shared/Button";
 import Loading from "../../components/shared/Loading";
 import NoData from "../../components/shared/NoData";
+
 import PageHead from "../../components/shared/PageHead";
-import { usePlayersQuery } from "../../generated/graphql";
+import { useApproveWithdrawMutation, usePlayersQuery } from "../../generated/graphql";
 
 const Players = () => {
   //graphql
@@ -25,9 +30,47 @@ const Players = () => {
 
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
+  const [,approve] = useApproveWithdrawMutation();
+
+  //responses
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorField, setErrorField] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [success, setSucess] = useState<boolean>(false);
+
+  const Complete = async (id:number) => {
+    setLoading(true);
+    const response = await approve({
+      id:id
+    });
+    if (response.data?.approveWithdraw.errors) {
+      setErrorField(response.data.approveWithdraw.errors[0].field);
+      setErrorMessage(response.data.approveWithdraw.errors[0].message);
+    } else {
+      setSucess(true);
+    }
+    setLoading(false);
+  }
+
   return (
     <>
-      <ChallengeSearchModal
+    <FeedbackModal
+        title={"Success"}
+        feedback={""} 
+        type={"success"}
+        cancelText={"Close"}
+        show={success}
+        close={() => setSucess(false)}     />
+
+      <FeedbackModal
+        title={errorField}
+        feedback={errorMessage}
+        type={"error"}
+        cancelText={"Close"}
+        show={errorField ? true : false}
+        close={() => setErrorField(null)}
+      />
+      <PlayerSearchModal
         isOpen={isSearching}
         close={() => setIsSearching(false)}
       />
@@ -60,7 +103,7 @@ const Players = () => {
                     <StatCard
                       title={"Banned players"}
                       amount={data.players.bannedPlayersCount}
-                      icon={<CgPill />}
+                      icon={<FaBan />}
                       active={activeTabIndex == 1}
                       onClick={() => {
                         setActiveTabName("banned players");
@@ -68,15 +111,19 @@ const Players = () => {
                       }}
                     />
                     <StatCard
+                      title={"Pending withdraws"}
+                      amount={`$${data.players.pendingWithdrawsCount}`}
+                      icon={<FaCashRegister />}
+                      active={activeTabIndex == 2}
+                      onClick={() => {
+                        setActiveTabName("pending withdraws");
+                        setActiveTabIndex(2);
+                      }}
+                    />
+                    <StatCard
                       title={"Total Balances"}
                       amount={`$${data.players.totalBalances}`}
-                      icon={<MdPendingActions />}
-                    />
-
-                    <StatCard
-                      title={"Today Deposits"}
-                      amount={`$${data.players.todayTotalDeposits}`}
-                      icon={<MdPendingActions />}
+                      icon={<MdAccountBalance />}
                     />
                   </div>
                 </div>
@@ -100,24 +147,46 @@ const Players = () => {
                     recently {activeTabName}
                   </p>
                 </div>
-                {/* {activeTabIndex == 0 && [
-                  data.challenges.activeChallenges.length > 0 ? (
-                    data.challenges.activeChallenges.map((challenge) => (
-                      <ChallengeCard challenge={challenge} />
+                {activeTabIndex == 0 && [
+                  data.players.activePlayers.length > 0 ? (
+                    data.players.activePlayers.map((player) => (
+                      <PlayerCard key={player.id} player={player} />
                     ))
                   ) : (
-                    <NoData title={"No Active challenges"} />
+                    <NoData title={"No online players"} />
                   ),
                 ]}
                 {activeTabIndex == 1 && [
-                  data.challenges.pendingChallenges.length > 0 ? (
-                    data.challenges.pendingChallenges.map((challenge) => (
-                      <ChallengeCard challenge={challenge} />
+                  data.players.bannedPlayers.length > 0 ? (
+                    data.players.bannedPlayers.map((player) => (
+                      <PlayerCard key={player.id} player={player} />
                     ))
                   ) : (
-                    <NoData title={"No Pending challenges"} />
+                    <NoData title={"No banned players"} />
                   ),
-                ]} */}
+                ]}
+                {activeTabIndex == 2 && [
+                  data.players.pendingWithdraws.length > 0 ? (
+                    data.players.pendingWithdraws.map((transaction) => (
+                      <div key={transaction.id} className="flex justify-between w-full space-x-3 px-3 text-sm lg:text-base bg-dark rounded-md text-white py-3 items-center">
+                        <p>{transaction.user.username}</p>
+                        <p
+                          
+                        >
+                          {moment(transaction.createdAt).fromNow()}
+                        </p>
+
+                        <p>
+                          ${transaction.amount}
+                        </p>
+                        <Button loading={loading} text="Complete" textColor={"white"} bgColor={"primary"} size={"xsmall"} width={"xmin"} onClick={() => Complete(transaction.id)}/> 
+                        
+                      </div>
+                    ))
+                  ) : (
+                    <NoData title={"No Pending transactions"} />
+                  ),
+                ]}
               </div>
             </div>
           )}

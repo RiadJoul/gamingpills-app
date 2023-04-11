@@ -112,7 +112,7 @@ const Feed = () => {
                 fetching && <Loading />
               }
               {
-                !fetching && data &&
+                !fetching && data.feed &&
                 <>
                   {user && user.emailVerified === false && <div className="mt-2.5">
                     <Alert text={"your email is not verified yet"} ctaText={"verify email"} cta={() => sendEmail()} loading={loading} />

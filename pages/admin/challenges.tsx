@@ -106,28 +106,28 @@ const Challenges = () => {
                   {
                     activeTabIndex == 0 && [
                         data.challenges.activeChallenges.length > 0 ? data.challenges.activeChallenges.map((challenge) => (
-                            <ChallengeCard challenge={challenge}/>
+                            <ChallengeCard key={challenge.id} challenge={challenge}/>
                         )) : <NoData title={"No Active challenges"}/>
                     ] 
                   }
                   {
                     activeTabIndex == 1 && [
                         data.challenges.pendingChallenges.length > 0 ? data.challenges.pendingChallenges.map((challenge) => (
-                            <ChallengeCard challenge={challenge}/>
+                            <ChallengeCard key={challenge.id} challenge={challenge}/>
                         )) : <NoData title={"No Pending challenges"}/>
                     ] 
                   }
                   {
                     activeTabIndex == 2 && [
                         data.challenges.disputedChallenges.length > 0 ? data.challenges.disputedChallenges.map((challenge) => (
-                            <ChallengeCard challenge={challenge}/>
+                            <ChallengeCard key={challenge.id} challenge={challenge}/>
                         )) : <NoData title={"No Disputed challenges :)"}/>
                     ] 
                   }
                   {
                     activeTabIndex == 3 && [
                         data.challenges.finishedChallenges.length > 0 ? data.challenges.finishedChallenges.map((challenge) => (
-                            <ChallengeCard challenge={challenge}/>
+                            <ChallengeCard key={challenge.id} challenge={challenge}/>
                         )) : <NoData title={"No Finished challenges"}/>
                     ] 
                   }

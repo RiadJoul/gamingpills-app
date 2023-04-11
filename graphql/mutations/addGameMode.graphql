@@ -1,0 +1,5 @@
+mutation CreateGameMode($gameId:Float!,$gameModeName:String!) {
+    createGameMode(gameId:$gameId,name:$gameModeName) {
+        ...GeneralResponse
+    }
+}

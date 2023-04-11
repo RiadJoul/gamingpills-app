@@ -9,6 +9,7 @@ query Players {
                 id
 			    balance
             }
+            lastSeen
         }
         bannedPlayers {
             id
@@ -20,9 +21,21 @@ query Players {
                 balance
             }
         }
+
+        pendingWithdraws {
+            id
+            status
+            amount
+            createdAt
+
+            user {
+                username
+            }
+        }
+
         onlinePlayersCount
         totalBalances
-        todayTotalDeposits
+        pendingWithdrawsCount
         bannedPlayersCount
   }
 }

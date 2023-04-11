@@ -1,7 +1,9 @@
 query SearchPlayer($username:String!) {
     searchPlayer(username:$username) {
         id
+        banned
         username
         avatar
+        lastSeen
     }
 }

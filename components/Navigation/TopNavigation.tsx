@@ -60,7 +60,7 @@ const TopNavigation = () => {
 
               {
                  user.role == Role.Player &&
-              <div className="flex justify-start lg:flex-1">
+              <div className="flex lg:hidden justify-start lg:flex-1">
                 <Notifications/>
               </div>
               }

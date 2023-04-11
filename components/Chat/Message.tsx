@@ -20,15 +20,13 @@ const Message = ({ text, user, createdAt }: Props) => {
                 <p className=" text-gray-400 mr-1 text-xs">{moment(createdAt).fromNow()}</p>
                 
 
-                <span className="font-bold text-primary mr-1">
-                    {user.username}:
+                <span className="flex font-bold text-primary mr-1">
+                {
+                    user.role == Role.Admin && <CgPill className="mr-1 text-primary"/>
+                }  {user.username}:
                 </span>
             </div>
-            <span className="break-words text-white">{
-                    user.role == Role.Admin && <div className="flex">
-                        <span className="flex items-center bg-black font-bold text-white p-1 rounded-lg"><CgPill className="mr-1 text-primary"/>ADMIN</span>
-                    </div>
-                }{text}</span>
+            <span className="break-words text-white">{text}</span>
         </div>
     )
 }

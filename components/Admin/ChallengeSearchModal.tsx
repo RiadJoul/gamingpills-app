@@ -35,7 +35,7 @@ export const ChallengeSearchModal = ({
       <Transition.Root show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-10 max-h-screen"
+          className="relative z-10 max-h-screen font-primary"
           onClose={() => close()}
         >
           <Transition.Child

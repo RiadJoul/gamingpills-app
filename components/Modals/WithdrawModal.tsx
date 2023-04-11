@@ -120,8 +120,8 @@ const WithdrawModal = (props: Props) => {
                           <label className="block text-left ml-1 text-gray-100 text-sm font-bold mb-2">
                             Amount to withdraw
                           </label>
-                          <Input placeholder="10.00" type="text" onKeyPress={(event) => {
-                              if (!/[0-9]/.test(event.key)) {
+                          <Input placeholder="10.00" type="text" onKeyDown={(event) => {
+                              if (!/[0-9]/.test(event.key) && event.key !== "Backspace") {
                                 event.preventDefault();
                               }
                             }}

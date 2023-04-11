@@ -121,7 +121,7 @@ const Chat = ({ challenge }: Props) => {
         show={errorField ? true : false}
         close={() => setErrorField(null)}
       />
-      <div className="hidden md:flex col-span-3 h-screen mt-5 mr-10 pb-36">
+      <div className="hidden md:flex sticky top-10 col-span-3 h-screen mt-5 mr-10 pb-36">
         <div className="bg-dark flex flex-col justify-between py-4 w-11/12 mx-1 px-1 rounded-md text-sm">
           <div className="flex flex-col overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch" ref={ref}>
             <h3 className="text-white text-center pb-1 text-base font-semibold">{challenge ? "Private chat" : "Public chat"}</h3>

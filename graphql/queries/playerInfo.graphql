@@ -1,0 +1,47 @@
+query PlayerInfo ($id:String!) {
+    playerInfo(id:$id) {
+        player {
+            id
+            role
+            banned
+            username
+            firstName
+            lastName
+            email
+            emailVerified
+            paypal
+            psnId
+            xboxId
+            avatar
+            lastSeen
+            birthDate
+            createdAt
+            Wallet {
+                balance
+            }
+        }
+
+        challenges {
+            id,
+            status
+            homePlayer {
+                username
+            }
+            homeScore
+            bet
+            awayPlayer {
+                username
+            }
+            awayScore
+            createdAt
+        }
+        transactions {
+            id
+            status
+            type
+            amount
+            description
+            createdAt
+        }
+    }
+}

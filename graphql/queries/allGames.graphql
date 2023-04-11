@@ -1,0 +1,13 @@
+query AllGames {
+    allGames {
+        id
+        name
+        active
+        category
+        cover
+        gameModes {
+            id
+            name
+        }
+    }
+}

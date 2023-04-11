@@ -12,6 +12,7 @@ import useAuth from "../../services/useAuth";
 import Loading from "../shared/Loading";
 import { SiFifa, SiNba } from "react-icons/si";
 import CarouselSelect from "../shared/BetsCarousel";
+import { AiOutlineAim } from "react-icons/ai";
 
 
 function classNames(...classes: string[]) {
@@ -26,7 +27,7 @@ interface Props {
 
 
 const ChallengeModal = (props: Props) => {
-  const [result] = useGamesQuery();
+  const [result,executeQuery] = useGamesQuery();
   const { data } = result;
 
   //@ts-ignore
@@ -56,10 +57,9 @@ const ChallengeModal = (props: Props) => {
   const [success, setSucess] = useState<boolean>(false);
 
 
-
   useEffect(() => {
-    if (data && data.games) {
-      setGameSelected(data.games[0])
+    if (data && data.activeGames) {
+      setGameSelected(data.activeGames[0])
       if (gameSelected)
         setSubModeSelected(gameSelected.gameModes[0])
     }
@@ -77,15 +77,14 @@ const ChallengeModal = (props: Props) => {
   }, [modeSelected]);
 
   const Challenge = async () => {
-    setLoading(true);
-    setErrorField(null);
-    setErrorMessage(null);
     if (modeSelected == modes[1] && !awayPlayer) {
       setErrorField('A player was not selected');
       setErrorMessage('Please select a player or change the challenge mode to open.');
-      setLoading(false);
       return;
     }
+    setLoading(true);
+    setErrorField(null);
+    setErrorMessage(null);
     const response = await challenge({
       game: gameSelected.id,
       gameMode: subModeSelected.id,
@@ -368,6 +367,7 @@ const ChallengeModal = (props: Props) => {
                                         <span className="text-lg lg:text-xl">
                                           {gameSelected.name.includes("FIFA") && <SiFifa />}
                                           {gameSelected.name.includes("NBA") && <SiNba />}
+                                          {gameSelected.name.includes("Call of duty") && <AiOutlineAim/>}
                                         </span>
 
                                         <span className="ml-3 block truncate text-sm lg:text-base">
@@ -384,7 +384,7 @@ const ChallengeModal = (props: Props) => {
                                       leaveTo="opacity-0"
                                     >
                                       <Listbox.Options className="absolute uppercase z-10 mt-1 w-full bg-white shadow-lg max-h-56 rounded-md py-1 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none text-sm">
-                                        {data.games.map((game) => (
+                                        {data.activeGames.map((game) => (
                                           <Listbox.Option
                                             key={game.id}
                                             className={({ active }) =>
@@ -403,6 +403,7 @@ const ChallengeModal = (props: Props) => {
                                                   <span className="text-lg lg:text-xl">
                                                     {game.name.includes("FIFA") && <SiFifa />}
                                                     {game.name.includes("NBA") && <SiNba />}
+                                                    {game.name.includes("Call of duty") && <AiOutlineAim/>}
                                                   </span>
                                                   <span
                                                     className={classNames(
@@ -455,6 +456,7 @@ const ChallengeModal = (props: Props) => {
                                         <span className="text-lg lg:text-xl">
                                           {gameSelected.name.includes("FIFA") && <SiFifa />}
                                           {gameSelected.name.includes("NBA") && <SiNba />}
+                                          {gameSelected.name.includes("Call of duty") && <AiOutlineAim/>}
                                     
                                         </span>
 
@@ -492,6 +494,7 @@ const ChallengeModal = (props: Props) => {
                                                     <span className="text-lg lg:text-xl">
                                                       {gameSelected.name.includes("FIFA") && <SiFifa />}
                                                       {gameSelected.name.includes("NBA") && <SiNba />}
+                                                      {gameSelected.name.includes("Call of duty") && <AiOutlineAim/>}
                                                     </span>
                                                     <span
                                                       className={classNames(

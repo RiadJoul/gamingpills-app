@@ -13,4 +13,5 @@ fragment userFragment on User {
   avatar
   lastSeen
   birthDate
+  createdAt
 }

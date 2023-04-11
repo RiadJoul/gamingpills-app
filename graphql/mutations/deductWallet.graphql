@@ -1,0 +1,5 @@
+mutation DeductWallet($userId:String!,$amount:Float!) {
+    deductWallet(userId:$userId,amount:$amount) {
+        ...GeneralResponse
+    }
+}

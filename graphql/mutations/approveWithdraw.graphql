@@ -1,0 +1,5 @@
+mutation ApproveWithdraw($id:Float!) {
+    approveWithdraw(id:$id) {
+        ...GeneralResponse
+    }
+}

@@ -1,0 +1,5 @@
+mutation DeleteGameMode($id:Float!) {
+    deleteGameMode(gameModeId:$id) {
+        ...GeneralResponse
+    }
+}

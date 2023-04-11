@@ -1,0 +1,5 @@
+mutation CreateGame($gameName:String!,$gameModeName:String!,$file:Upload!) {
+    createGame(name:$gameName,gameModeName:$gameModeName,file:$file) {
+        ...GeneralResponse
+    }
+}

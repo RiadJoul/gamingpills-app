@@ -30,7 +30,7 @@ export const ChallengeModal = ({ challengeId, isOpen, close }: { challengeId: st
             <Transition.Root show={isOpen} as={Fragment}>
                 <Dialog
                     as="div"
-                    className="relative z-10 max-h-screen"
+                    className="relative z-10 max-h-screen font-primary"
 
                     onClose={() => close()}
                 >
@@ -146,12 +146,7 @@ export const ChallengeModal = ({ challengeId, isOpen, close }: { challengeId: st
                                                         data.challenge.status == Status.Disputed &&
                                                         <button className="bg-green-800 hover:bg-green-900 p-2 mx-1 text-white w-full rounded-md " onClick={() => setIsResolveModalOpen(true)}>Resolve</button>
                                                     }
-                                                    {
-                                                        data.challenge.status == Status.Active || data.challenge.status == Status.Finished && <button className="bg-primary-focus hover:bg-primary text-white px-3 py-2 w-full rounded-md" onClick={() => router.push("/game/lobby/" + challengeId)}>Lobby</button>
-                                                    }
-                                                    {
-                                                        data.challenge.status == Status.Disputed && <button className="bg-primary-focus hover:bg-primary text-white px-3 py-2 w-full rounded-md" onClick={() => router.push("/game/lobby/" + challengeId)}>Lobby</button>
-                                                    }
+                                                    <button className="bg-primary-focus hover:bg-primary text-white px-3 py-2 w-full rounded-md" onClick={() => router.push("/game/lobby/" + challengeId)}>Lobby</button>
                                                 </div>
                                             </div>
 

@@ -10,7 +10,7 @@ interface Props {
 
 const StatCard = ({title,amount,icon, onClick, active}:Props) => {
     return (
-        <div onClick={onClick} className={`${active ? "bg-slate-900" : "bg-dark"} cursor-pointer rounded-lg px-4 mx-2 py-2 text-white`}>
+        <div onClick={onClick} className={`${active ? "bg-slate-900" : "bg-dark"} ${onClick && !active && "hover:opacity-80 cursor-pointer"}  rounded-lg px-4 mx-2 py-2 text-white`}>
             <div className="flex flex-col">
                 <h4 className="text-primary text-4xl">{icon}</h4>
 
