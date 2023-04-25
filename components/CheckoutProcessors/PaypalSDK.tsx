@@ -16,8 +16,7 @@ const PaypalSDK = ({ amount, close }: Props) => {
   const [error, setError] = useState<boolean>(false);
   //TODO: make a testing api and a prod api
   // and hide this
-  const CLIENT_ID =
-    "AYCWg0aCcyF8OVT7oaXgeXQ4KoDiO_g93uRdF-aOFdBUjdvsnWF_6JgzoyQBVfAGyD0oXhPdaEqWfHYf";
+  const CLIENT_ID = "";
   const initialOptions = {
     "client-id": CLIENT_ID,
     currency: "USD",
